@@ -2,8 +2,8 @@ package going.web.controller;
 
 import going.domain.ConstField;
 import going.domain.item.ItemRepository;
-import going.domain.item.ItemVO;
-import going.domain.member.MemberVO;
+import going.domain.item.Item;
+import going.domain.member.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,8 +25,8 @@ public class ItemController {
     }
 
     @GetMapping("/detail/{itemId}")
-    public String itemDetail(@PathVariable long itemId, Model model) {
-        ItemVO findItem = itemRepository.findById(itemId);
+    public String itemDetail(@PathVariable("itemId") long itemId, Model model) {
+        Item findItem = itemRepository.findById(itemId);
         model.addAttribute("itemDetail", findItem);
 
         return "item/detail";
@@ -34,12 +34,12 @@ public class ItemController {
 
     @ResponseBody
     @PostMapping("/cart/add")
-    public String cartAdd(@RequestParam("itemId") Long itemId, @SessionAttribute(name = ConstField.LOGIN_MEMBER) MemberVO loginMember) {
+    public String cartAdd(@RequestParam("itemId") Long itemId, @SessionAttribute(name = ConstField.LOGIN_MEMBER) Member loginMember) {
 
-        ItemVO findItem = itemRepository.findById(itemId);
-        List<MemberVO> likedList = findItem.getLikedBy();
+        Item findItem = itemRepository.findById(itemId);
+        List<Member> likedList = findItem.getLikedBy();
 
-        List<ItemVO> cartList = loginMember.getCartList();
+        List<Item> cartList = loginMember.getCartList();
         if (!cartList.contains(findItem)) {
             cartList.add(findItem);
             likedList.add(loginMember);

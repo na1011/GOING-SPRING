@@ -1,6 +1,6 @@
 package going.domain.item;
 
-import going.domain.member.MemberVO;
+import going.domain.member.Member;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,15 +9,15 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ItemVO {
+public class Item {
 
     private Long id;
     private String itemName;
     private Integer price;
     private int likes;
-    private List<MemberVO> likedBy;
+    private List<Member> likedBy;
 
-    public ItemVO(String itemName, Integer price) {
+    public Item(String itemName, Integer price) {
         this.itemName = itemName;
         this.price = price;
         this.likes = 0;

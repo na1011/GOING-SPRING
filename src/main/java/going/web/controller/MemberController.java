@@ -1,7 +1,9 @@
 package going.web.controller;
 
 import going.domain.ConstField;
-import going.domain.member.MemberVO;
+import going.domain.form.LoginForm;
+import going.domain.form.MemberRegisterForm;
+import going.domain.member.Member;
 import going.domain.member.Role;
 import going.web.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,11 +32,9 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public String memberRegister(@RequestParam("email") String email,
-                                 @RequestParam("password") String password,
-                                 @RequestParam("role") String role_tmp) {
+    public String memberRegister(@ModelAttribute MemberRegisterForm form) {
         Role role = null;
-        switch (role_tmp) {
+        switch (form.getRole()) {
             case "customer" :
                 role = Role.CUSTOMER;
             case "business":
@@ -43,14 +43,14 @@ public class MemberController {
                 role = Role.CUSTOMER;
         }
 
-        MemberVO member = new MemberVO(email, password, role);
+        Member member = new Member(form.getEmail(), form.getPassword(), role);
         service.memberRegister(member);
 
         return "redirect:/member/login";
     }
 
     @GetMapping("/login")
-    public String viewLogin(@SessionAttribute(name = ConstField.LOGIN_MEMBER, required = false) MemberVO loginMember) {
+    public String viewLogin(@SessionAttribute(name = ConstField.LOGIN_MEMBER, required = false) Member loginMember) {
         if (loginMember != null) {
             return "redirect:/";
         }
@@ -58,20 +58,18 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam("email") String email,
-                        @RequestParam("password") String password,
-                        @RequestParam(name = "addr", defaultValue = "/") String addr, HttpServletRequest request, Model model) {
-        MemberVO loginMember = service.login(email, password);
+    public String login(@ModelAttribute LoginForm form, HttpServletRequest request, Model model) {
+        Member loginMember = service.login(form.getEmail(), form.getPassword());
 
         if (loginMember == null) {
             model.addAttribute("msg", "아이디 또는 비밀번호 오류입니다.");
-            model.addAttribute("url", "/member/login?addr=" + addr);
+            model.addAttribute("url", "/member/login?addr=" + form.getAddr());
             return "alert";
         }
 
         HttpSession session = request.getSession();
         session.setAttribute(ConstField.LOGIN_MEMBER, loginMember);
-        return "redirect:" + addr;
+        return form.getAddr() != null ? "redirect:" + form.getAddr() : "redirect:/";
     }
 
     @RequestMapping("/logout")

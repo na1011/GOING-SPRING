@@ -1,6 +1,6 @@
 package going.domain.member;
 
-import going.domain.item.ItemVO;
+import going.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,15 +9,15 @@ import java.util.List;
 
 @Getter
 @Setter
-public class MemberVO {
+public class Member {
 
     private Long id;
     private String email;
     private String password;
     private Role role;
-    private List<ItemVO> cartList;
+    private List<Item> cartList;
 
-    public MemberVO(String email, String password, Role role) {
+    public Member(String email, String password, Role role) {
         this.email = email;
         this.password = password;
         this.role = role;

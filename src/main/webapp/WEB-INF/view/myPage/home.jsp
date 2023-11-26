@@ -88,11 +88,11 @@
                                     <c:forEach var="trv" items="${cartList}">
                                         <li id="like${trv.id}">
                                             <div class="image">
-                                                <a href="/item/detail?itemId=${trv.id}"><img
+                                                <a href="/item/detail/${trv.id}"><img
                                                         src="${pageContext.request.contextPath}/resources/images/MyPage/trip1.jpg"
                                                         alt="#"></a>
                                             </div>
-                                            <a href="/item/detail?itemId=${trv.id}" class="title">
+                                            <a href="/item/detail/${trv.id}" class="title">
                                                 <h6>${trv.itemName}</h6>
                                             </a>
                                             <span class="time"><fmt:formatNumber

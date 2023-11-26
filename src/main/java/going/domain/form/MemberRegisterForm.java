@@ -5,12 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class LoginForm {
+public class MemberRegisterForm {
 
     private String email;
     private String password;
-    private String addr;
+    private String role;
 
-    public LoginForm() {
+    public MemberRegisterForm() {
     }
 }

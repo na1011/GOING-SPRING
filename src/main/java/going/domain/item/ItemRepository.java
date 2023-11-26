@@ -12,24 +12,24 @@ import java.util.stream.Collectors;
 @Repository
 public class ItemRepository {
 
-    private static Map<Long, ItemVO> store = new HashMap<>();
+    private static Map<Long, Item> store = new HashMap<>();
     private static long sequence = 0L;
 
-    public ItemVO save(ItemVO item) {
+    public Item save(Item item) {
         item.setId(++sequence);
         store.put(item.getId(), item);
         return item;
     }
 
-    public ItemVO findById(Long id) {
+    public Item findById(Long id) {
         return store.get(id);
     }
 
-    public List<ItemVO> findAll() {
+    public List<Item> findAll() {
         return new ArrayList<>(store.values());
     }
 
-    public List<ItemVO> searchByTitle(String title) {
+    public List<Item> searchByTitle(String title) {
         return findAll().stream()
                 .filter(i -> i.getItemName().contains(title))
                 .collect(Collectors.toList());
@@ -42,8 +42,8 @@ public class ItemRepository {
     @PostConstruct
     public void init() {
         for (int i = 1; i <= 11; i++) {
-            save(new ItemVO("테스트", i * i * i));
-            save(new ItemVO("검색용", i * i));
+            save(new Item("테스트", i * i * i));
+            save(new Item("검색용", i * i));
         }
     }
 }

@@ -2,7 +2,7 @@ package going.web.controller;
 
 import going.domain.Paging;
 import going.domain.item.ItemRepository;
-import going.domain.item.ItemVO;
+import going.domain.item.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +29,10 @@ public class SearchController {
     @GetMapping("/main")
     public String mainPage(@RequestParam(defaultValue = "1", name = "page") int page, Model model) {
 
-        List<ItemVO> findAll = itemRepository.findAll();
+        List<Item> findAll = itemRepository.findAll();
         Paging paging = new Paging(page, findAll.size(), 3, 5);
 
-        List<ItemVO> itemList = listPaging(paging, findAll);
+        List<Item> itemList = listPaging(paging, findAll);
 
         model.addAttribute("itemList", itemList);
         model.addAttribute("paging", paging);
@@ -42,10 +42,10 @@ public class SearchController {
     @GetMapping("/result")
     public String search(@RequestParam(defaultValue = "1", name = "page") int page, @RequestParam("searchTitle") String searchTitle, Model model) {
 
-        List<ItemVO> result = itemRepository.searchByTitle(searchTitle);
+        List<Item> result = itemRepository.searchByTitle(searchTitle);
         Paging paging = new Paging(page, result.size(), 3, 5);
 
-        List<ItemVO> itemList = listPaging(paging, result);
+        List<Item> itemList = listPaging(paging, result);
 
         model.addAttribute("itemList", itemList);
         model.addAttribute("title", searchTitle);
@@ -53,8 +53,8 @@ public class SearchController {
         return "search/result";
     }
 
-    private List<ItemVO> listPaging(Paging paging, List<ItemVO> list) {
-        List<ItemVO> itemList = new ArrayList<>(3);
+    private List<Item> listPaging(Paging paging, List<Item> list) {
+        List<Item> itemList = new ArrayList<>(3);
         for (int i = paging.getStartIndex(); i <= paging.getEndIndex(); i++) {
             itemList.add(list.get(i - 1));
         }

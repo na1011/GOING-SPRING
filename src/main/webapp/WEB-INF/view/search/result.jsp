@@ -195,7 +195,7 @@
                                                     <div class="row align-items-center">
                                                         <div class="col-lg-5 col-md-7 col-12">
                                                             <div class="image">
-                                                                <a href="/item/detail?itemId=${trv.id}"><img
+                                                                <a href="/item/detail/${trv.id}"><img
                                                                         src="${pageContext.request.contextPath}/resources/images/search/japan.png"
                                                                         alt="#"></a>
                                                                 <i class=" cross-badge lni lni-bolt"></i>
@@ -206,10 +206,10 @@
                                                             <div class="content">
                                                                 <a href="javascript:void(0)" class="tag">해외여행</a>
                                                                 <h3 class="title">
-                                                                    <a href="/item/detail?itemId=${trv.id}">${trv.itemName}</a>
+                                                                    <a href="/item/detail/${trv.id}">${trv.itemName}</a>
                                                                 </h3>
                                                                 <p class="location"><a
-                                                                        href="/item/detail?itemId=${trv.id}">
+                                                                        href="/item/detail/${trv.id}">
                                                                     <i class="lni lni-map-marker">
                                                                     </i>삿포로,오타루,후라노,비에이</a></p>
                                                                 <ul class="info">
