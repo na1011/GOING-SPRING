@@ -1,9 +1,9 @@
 package going.web.controller;
 
-import going.domain.ConstField;
-import going.domain.item.ItemRepository;
 import going.domain.item.Item;
+import going.domain.item.ItemRepository;
 import going.domain.member.Member;
+import going.web.resolver.Login;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,8 @@ public class ItemController {
 
     @ResponseBody
     @PostMapping("/cart/add")
-    public String cartAdd(@RequestParam("itemId") Long itemId, @SessionAttribute(name = ConstField.LOGIN_MEMBER) Member loginMember) {
+    public String cartAdd(@RequestParam("itemId") Long itemId,
+                          @Login Member loginMember) {
 
         Item findItem = itemRepository.findById(itemId);
         List<Member> likedList = findItem.getLikedBy();

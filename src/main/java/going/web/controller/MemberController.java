@@ -5,6 +5,7 @@ import going.domain.form.LoginForm;
 import going.domain.form.MemberRegisterForm;
 import going.domain.member.Member;
 import going.domain.member.Role;
+import going.web.resolver.Login;
 import going.web.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -50,7 +51,7 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String viewLogin(@SessionAttribute(name = ConstField.LOGIN_MEMBER, required = false) Member loginMember) {
+    public String viewLogin(@Login Member loginMember) {
         if (loginMember != null) {
             return "redirect:/";
         }
