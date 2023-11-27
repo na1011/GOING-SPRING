@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -28,7 +30,7 @@ public class MemberController {
     }
 
     @GetMapping("/register")
-    public String viewRegister(Model model) {
+    public String viewRegister() {
         return "member/register";
     }
 
@@ -59,7 +61,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute LoginForm form, HttpServletRequest request, Model model) {
+    public String login(@ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletRequest request, Model model) {
         Member loginMember = service.login(form.getEmail(), form.getPassword());
 
         if (loginMember == null) {

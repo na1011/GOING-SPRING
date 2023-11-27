@@ -39,23 +39,23 @@ public class ItemController {
 
         Item findItem = itemRepository.findById(itemId);
         List<Member> likedList = findItem.getLikedBy();
-
         List<Item> cartList = loginMember.getCartList();
-        if (!cartList.contains(findItem)) {
-            cartList.add(findItem);
-            likedList.add(loginMember);
-            loginMember.setCartList(cartList);
-            findItem.setLikedBy(likedList);
 
-            return "좋아요";
-
-        } else {
+        if (cartList.contains(findItem)) {
             cartList.remove(findItem);
             likedList.remove(loginMember);
             loginMember.setCartList(cartList);
             findItem.setLikedBy(likedList);
 
             return "취소";
+
+        } else {
+            cartList.add(findItem);
+            likedList.add(loginMember);
+            loginMember.setCartList(cartList);
+            findItem.setLikedBy(likedList);
+
+            return "좋아요";
         }
     }
 }

@@ -4,7 +4,6 @@ import going.domain.form.ItemRegisterForm;
 import going.domain.item.Item;
 import going.domain.item.ItemRepository;
 import going.domain.member.Member;
-import going.domain.member.MemberRepository;
 import going.web.resolver.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +22,7 @@ public class MyPageController {
     private final ItemRepository itemRepository;
 
     @Autowired
-    public MyPageController(ItemRepository itemRepository, MemberRepository memberRepository) {
+    public MyPageController(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
 
