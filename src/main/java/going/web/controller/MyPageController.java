@@ -5,9 +5,12 @@ import going.domain.item.Item;
 import going.domain.item.ItemRepository;
 import going.domain.member.Member;
 import going.web.resolver.Login;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("/myPage/*")
 public class MyPageController {
@@ -44,7 +48,12 @@ public class MyPageController {
     }
 
     @PostMapping("/register")
-    public String itemRegister(@ModelAttribute ItemRegisterForm form) {
+    public String itemRegister(@Validated @ModelAttribute ItemRegisterForm form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            log.info("에러 발생 = {}", bindingResult);
+            return "myPage/register";
+        }
+
         Item item = new Item(form.getItemName(), form.getPrice());
         itemRepository.save(item);
         return "redirect:/item/detail/" + item.getId();

@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -221,6 +222,11 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>상품입력*</label>
+                                                            <spring:hasBindErrors name="itemRegisterForm">
+                                                                <c:if test="${errors.hasFieldErrors('itemName')}">
+                                                                    <p>상품명 에러!</p>
+                                                                </c:if>
+                                                            </spring:hasBindErrors>
                                                             <input name="itemName" type="text"
                                                                    placeholder="상품을 입력해주세요"/>
                                                         </div>
@@ -229,6 +235,11 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>가격 입력*</label>
+                                                            <spring:hasBindErrors name="itemRegisterForm">
+                                                                <c:if test="${errors.hasFieldErrors('itemName')}">
+                                                                    <p>가격 에러!</p>
+                                                                </c:if>
+                                                            </spring:hasBindErrors>
                                                             <input name="price" type="text"
                                                                    placeholder="가격을 입력해주세요"/>
                                                         </div>
