@@ -1,19 +1,14 @@
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+
+<%-- 유효성 검증을 위한 라이브러리 --%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ include file="/WEB-INF/common/header.jsp" %>
 
 <style>
-    .post-title {
-        padding: 45px 30px;
-        border-bottom: 1px solid #eee;
-        display: block;
-        background-color: #7992bc;
-        font-size: 23px;
-        letter-spacing: -1px;
-        color: #fff;
-        font-weight: 600;
+    .errors {
+        color: #dc3545;
     }
 </style>
 
@@ -79,7 +74,8 @@
                                     </div>
                                 </nav>
 
-                                <form class="default-form-style" method="post" action="/myPage/register">
+                                <form:form modelAttribute="itemRegisterForm"
+                                        class="default-form-style" method="post" action="/myPage/register">
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="nav-item-info" role="tabpanel"
                                              aria-labelledby="nav-item-info-tab">
@@ -221,26 +217,16 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>상품입력*</label>
-                                                            <spring:hasBindErrors name="itemRegisterForm">
-                                                                <c:if test="${errors.hasFieldErrors('itemName')}">
-                                                                    <p>상품명 에러!</p>
-                                                                </c:if>
-                                                            </spring:hasBindErrors>
-                                                            <input name="itemName" type="text"
-                                                                   placeholder="상품을 입력해주세요"/>
+                                                            <label>상품입력* </label> <form:errors path="itemName" class="errors" />
+                                                            <form:input path="itemName" type="text"
+                                                                   placeholder="상품명을 입력해주세요"/>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>가격 입력*</label>
-                                                            <spring:hasBindErrors name="itemRegisterForm">
-                                                                <c:if test="${errors.hasFieldErrors('itemName')}">
-                                                                    <p>가격 에러!</p>
-                                                                </c:if>
-                                                            </spring:hasBindErrors>
-                                                            <input name="price" type="text"
+                                                            <label>가격 입력* </label> <form:errors path="price" class="errors" />
+                                                            <form:input path="price" type="text"
                                                                    placeholder="가격을 입력해주세요"/>
                                                         </div>
                                                     </div>
@@ -422,7 +408,7 @@
                                             <!-- Start Post Ad Step Three Content -->
                                         </div>
                                     </div>
-                                </form>
+                                </form:form>
                             </div>
                             <!-- End Post Ad Tab -->
                         </div>

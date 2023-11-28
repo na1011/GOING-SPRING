@@ -11,10 +11,11 @@ import org.hibernate.validator.constraints.Range;
 public class ItemRegisterForm {
 
     @NotBlank
-    private String ItemName;
+    private String itemName;
+
     @NotNull
     @Range(min = 1000, max = 9999999)
-    private int price;
+    private Integer price;
 
     public ItemRegisterForm() {
     }

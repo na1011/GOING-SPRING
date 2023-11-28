@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 
@@ -16,6 +18,10 @@
         /* line-height: 1.5; */
         min-height: calc(1.5em + 1rem + 2px);
         width: 100%;
+    }
+
+    .errors {
+        color: #dc3545;
     }
 </style>
 
@@ -62,7 +68,8 @@
                         </nav>
                     </div>
                     <div class="d1">
-                        <form action="/member/register" method="post"
+                        <form:form modelAttribute="memberRegisterForm"
+                                action="/member/register" method="post"
                               style=" border: 1px solid #c9c9c9; border-top: none; padding: 40px;">
                             <div style="margin:  10px;">
 
@@ -89,33 +96,36 @@
                             </div>
 
                             <div class="form-floating mt-5">
-                                <input type="email" name="email" class="form-control" id="email" required>
+                                <form:input type="email" path="email" class="form-control" id="email" required="required"/>
                                 <label><span id="result">이메일</span></label>
+                                <form:errors path="email" class="errors" />
                             </div>
 
                             <div class="form-floating mt-3">
-                                <input type="password" name="password" class="form-control form-control-lg mt-3"
-                                       pattern="^(?=.*[a-zA-z])(?=.*[0-9]).{6,12}$" required>
+                                <form:input type="password" path="password" class="form-control form-control-lg mt-3"
+                                       pattern="^(?=.*[a-zA-z])(?=.*[0-9]).{6,12}$" required="required"/>
                                 <label><span>비밀번호 - 대문자 혹은 소문자와 숫자를 합해 6자리 이상 12자리 이하</span></label>
+                                <form:errors path="password" class="password" />
                             </div>
                             <div class="form-floating mt-3">
-                                <input type="password" name="passC" class="form-control form-control-lg mt-3"
-                                       pattern="^(?=.*[a-zA-z])(?=.*[0-9]).{6,12}$" required>
+                                <input type="password" id="passC" class="form-control form-control-lg mt-3"
+                                       pattern="^(?=.*[a-zA-z])(?=.*[0-9]).{6,12}$" required="required"/>
                                 <label><span id="passResult">비밀번호 확인</span></label>
                             </div>
 
                             <div class="form-floating mt-4">
-                                <input type="text" name="name" class="form-control form-control-lg mt-3" required>
+                                <form:input type="text" path="name" class="form-control form-control-lg mt-3" required="required"/>
                                 <label><span id="passResult">이름</span></label>
+                                <form:errors path="name" class="name" />
                             </div>
 
                             <div class="button">
                                 <input type="hidden" name="role" value="customer">
                                 <button type="submit" class="btn">가입하기</button>
                             </div>
-                            <p class="outer-link">이미 아이디가 있으신가요? <a href="login.html"> 로그인 하기</a>
+                            <p class="outer-link">이미 아이디가 있으신가요? <a href="/member/login"> 로그인 하기</a>
                             </p>
-                        </form>
+                        </form:form>
                     </div>
                     <div class="d2">
                         <form action="/member/register" method="post"

@@ -43,7 +43,7 @@ public class MyPageController {
     }
 
     @GetMapping("/register")
-    public String itemRegisterView() {
+    public String itemRegisterView(@ModelAttribute ItemRegisterForm form) {
         return "myPage/register";
     }
 

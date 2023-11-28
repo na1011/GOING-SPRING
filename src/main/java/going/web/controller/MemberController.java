@@ -14,8 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
@@ -30,12 +33,17 @@ public class MemberController {
     }
 
     @GetMapping("/register")
-    public String viewRegister() {
+    public String viewRegister(@ModelAttribute MemberRegisterForm form) {
         return "member/register";
     }
 
     @PostMapping("/register")
-    public String memberRegister(@ModelAttribute MemberRegisterForm form) {
+    public String memberRegister(@Validated @ModelAttribute MemberRegisterForm form, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "member/register";
+        }
+
         Role role = null;
         switch (form.getRole()) {
             case "customer" :
