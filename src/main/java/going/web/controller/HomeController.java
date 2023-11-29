@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -22,11 +21,11 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        List<Item> cheapList = itemRepository.findAll().stream()
-                .sorted((a, b) -> a.getPrice().compareTo(b.getPrice())).limit(5)
-                .collect(Collectors.toList());
+        List<Item> cheapList = itemRepository.cheapList();
+        List<Item> popularList = itemRepository.popularList();
 
         model.addAttribute("cheapList", cheapList);
+        model.addAttribute("popularList", popularList);
         return "index";
     }
 

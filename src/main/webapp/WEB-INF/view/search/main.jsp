@@ -292,9 +292,9 @@
             },
 
             success: function (result) {
-                if (result == "좋아요") {
+                if (result === "좋아요") {
                     $('#like' + itemId).attr('class', 'like-filled');
-                } else if (result == "취소") {
+                } else if (result === "취소") {
                     $('#like' + itemId).attr('class', 'like');
                 } else {
                     alert('찜하기 기능은 로그인 후 이용하실 수 있습니다.');

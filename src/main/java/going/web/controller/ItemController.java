@@ -46,6 +46,7 @@ public class ItemController {
             likedList.remove(loginMember);
             loginMember.setCartList(cartList);
             findItem.setLikedBy(likedList);
+            findItem.setLikes(findItem.getLikes() - 1);
 
             return "취소";
 
@@ -54,6 +55,7 @@ public class ItemController {
             likedList.add(loginMember);
             loginMember.setCartList(cartList);
             findItem.setLikedBy(likedList);
+            findItem.setLikes(findItem.getLikes() + 1);
 
             return "좋아요";
         }

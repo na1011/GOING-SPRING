@@ -3,10 +3,7 @@ package going.domain.item;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -32,6 +29,18 @@ public class ItemRepository {
     public List<Item> searchByTitle(String title) {
         return findAll().stream()
                 .filter(i -> i.getItemName().contains(title))
+                .collect(Collectors.toList());
+    }
+
+    public List<Item> cheapList() {
+        return findAll().stream()
+                .sorted((a, b) -> a.getPrice().compareTo(b.getPrice())).limit(5)
+                .collect(Collectors.toList());
+    }
+
+    public List<Item> popularList() {
+        return findAll().stream()
+                .sorted(Comparator.comparing(Item::getLikes).reversed())
                 .collect(Collectors.toList());
     }
 
