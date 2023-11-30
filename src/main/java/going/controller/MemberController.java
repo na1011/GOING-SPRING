@@ -1,12 +1,12 @@
-package going.web.controller;
+package going.controller;
 
-import going.domain.ConstField;
+import going.common.ConstField;
 import going.domain.form.LoginForm;
 import going.domain.form.MemberRegisterForm;
 import going.domain.member.Member;
 import going.domain.member.Role;
-import going.web.resolver.Login;
-import going.web.service.MemberService;
+import going.config.resolver.Login;
+import going.model.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;

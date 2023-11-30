@@ -1,8 +1,8 @@
-package going.web;
+package going.config;
 
-import going.web.interceptor.CartAddInterceptor;
-import going.web.interceptor.LoginCheckInterceptor;
-import going.web.resolver.LoginResolver;
+import going.config.interceptor.CartAddInterceptor;
+import going.config.interceptor.LoginCheckInterceptor;
+import going.config.resolver.LoginResolver;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

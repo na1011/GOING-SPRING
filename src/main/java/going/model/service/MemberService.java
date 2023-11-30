@@ -1,4 +1,4 @@
-package going.web.service;
+package going.model.service;
 
 import going.domain.member.MemberRepository;
 import going.domain.member.Member;

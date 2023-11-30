@@ -1,4 +1,4 @@
-package going.web.controller;
+package going.controller;
 
 import going.domain.item.Item;
 import going.domain.item.ItemRepository;

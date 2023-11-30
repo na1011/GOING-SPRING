@@ -1,4 +1,4 @@
-package going.web.resolver;
+package going.config.resolver;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

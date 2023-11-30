@@ -1,6 +1,6 @@
-package going.web.interceptor;
+package going.config.interceptor;
 
-import going.domain.ConstField;
+import going.common.ConstField;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

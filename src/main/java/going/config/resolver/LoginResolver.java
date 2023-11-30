@@ -1,6 +1,6 @@
-package going.web.resolver;
+package going.config.resolver;
 
-import going.domain.ConstField;
+import going.common.ConstField;
 import going.domain.member.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

@@ -1,4 +1,4 @@
-package going.domain;
+package going.common;
 
 public class ConstField {
 
