@@ -1,4 +1,4 @@
-package going.repository.mybatis;
+package going.repository.mybatis.mappers;
 
 import going.model.item.ItemModifyDto;
 import going.model.item.ItemSaveDto;
