@@ -1,10 +1,10 @@
-package going.web.controller;
+package going.controller;
 
+import going.config.resolver.Login;
 import going.domain.form.ItemRegisterForm;
 import going.domain.item.Item;
 import going.domain.item.ItemRepository;
 import going.domain.member.Member;
-import going.web.resolver.Login;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

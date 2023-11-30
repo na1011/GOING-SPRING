@@ -20,5 +20,5 @@ public interface ItemMapper {
 
     List<ItemViewDto> findAll();
 
-    int count();
+//    int count();
 }

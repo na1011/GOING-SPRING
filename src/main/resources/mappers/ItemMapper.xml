@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="going.repository.mybatis.ItemMapper">
+
+    <sql id="itemView">
+        select ITEM_ID,
+               ITEM_NAME,
+               AGENCY_NAME,
+               LOCATION,
+               PRICE,
+               DESCRIPTION,
+               DEPARTURE_DATE,
+               ARRIVAL_DATE,
+               LIKE_COUNT
+        from TRAVEL_ITEM
+    </sql>
+
+    <!-- 아이템 저장 -->
+    <insert id="save" parameterType="going.model.item.ItemSaveDto">
+        insert into TRAVEL_ITEM (ITEM_ID, AGENCY_ID, ITEM_NAME, AGENCY_NAME, LOCATION, PRICE, DESCRIPTION)
+        VALUES ( TRAVEL_ITEM_SQ.nextval
+               , #{agency_id}
+               , #{item_name}
+               , #{agency_name}
+               , #{location}
+               , #{price}
+               , #{description});
+    </insert>
+
+    <!-- 아이템 수정 -->
+    <update id="update" parameterType="going.model.item.ItemModifyDto">
+        update TRAVEL_ITEM
+        set ITEM_NAME      = #{item_name},
+            LOCATION       = #{location},
+            PRICE          = #{price},
+            DESCRIPTION    = #{description},
+            DEPARTURE_DATE = #{departure_date},
+            ARRIVAL_DATE   = #{arrival_date}
+        where ITEM_ID = #{item_id};
+    </update>
+
+    <!-- 아이템 조회 -->
+    <select id="findById" parameterType="long" resultType="going.model.item.ItemViewDto">
+        <include refid="itemView" />
+        where ITEM_ID = #{item_id};
+    </select>
+    
+    <!-- 아이템 삭제 -->
+    <delete id="deleteById" parameterType="long">
+        update TRAVEL_ITEM
+        set DELETE_YN = 1
+        where ITEM_ID = #{item_id};
+    </delete>
+
+    <!-- 아이템 리스트 조회 -->
+    <select id="findAll" resultType="going.model.item.ItemViewDto">
+        <include refid="itemView" />
+        where DELETE_YN = 0
+        order by ITEM_ID desc;
+    </select>
+
+</mapper>
