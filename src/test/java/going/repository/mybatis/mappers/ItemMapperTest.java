@@ -1,20 +1,16 @@
 package going.repository.mybatis.mappers;
 
-import going.domain.member.MemberRepository;
+import going.domain.Item;
 import going.model.item.ItemModifyDto;
 import going.model.item.ItemSaveDto;
-import going.model.item.ItemViewDto;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@Slf4j
 @SpringBootTest
 class ItemMapperTest {
 
@@ -22,44 +18,63 @@ class ItemMapperTest {
     ItemMapper itemMapper;
 
     @Test
-    void crud() {
-        ItemSaveDto itemSaveDto = ItemSaveDto.builder()
-                .item_name("5번째")
-                .agency_id(2L)
-                .agency_name("OO투어")
+    void save() {
+        ItemSaveDto itemSave = ItemSaveDto.builder()
+                .itemName("아이템 맵퍼 테스트")
+                .agencyId(1L)
+                .agencyName("A투어")
                 .location("뉴욕")
                 .price(99999)
-                .departure_date(LocalDateTime.now())
-                .arrival_date(LocalDateTime.now())
-                .description("상품 등록입니다.")
+                .departureDate(LocalDateTime.now())
+                .arrivalDate(LocalDateTime.now())
+                .description("상품 등록 테스트입니다.")
                 .build();
+        Item item = itemSave.toEntity();
+        itemMapper.save(item);
 
-        itemMapper.save(itemSaveDto);
+        Item findItem = itemMapper.findById(item.getItemId()).orElseThrow(() -> new NullPointerException("찾는 아이템이 없습니다."));
 
-        List<ItemViewDto> findAll = itemMapper.findAll();
-        assertThat(findAll.size()).isEqualTo(3);
-
-        ItemViewDto findById = itemMapper.findById(5L);
-        assertThat(findById.getItem_name()).isEqualTo(itemSaveDto.getItem_name());
-
-        ItemModifyDto itemModifyDto = ItemModifyDto.builder()
-                        .item_id(findById.getItem_id())
-                                .
-        itemMapper.update();
+        assertThat(findItem.getItemName()).isEqualTo(item.getItemName());
     }
 
     @Test
     void update() {
+        ItemModifyDto itemModify = ItemModifyDto.builder()
+                .itemId(18L)
+                .itemName("아이템 수정 테스트")
+                .arrivalDate(LocalDateTime.now())
+                .departureDate(LocalDateTime.now())
+                .description("상품 수정 테스트입니다.")
+                .price(11111)
+                .location("도쿄")
+                .build();
 
-        itemMapper.update();
+        Item item = itemModify.toEntity();
+        itemMapper.update(item);
+
+        Item findItem = itemMapper.findById(item.getItemId()).orElseThrow(() -> new NullPointerException("찾는 아이템이 없습니다."));
+
+        assertThat(findItem.getItemName()).isEqualTo("아이템 수정 테스트");
     }
 
     @Test
     void deleteById() {
-    }
+        ItemSaveDto itemSave = ItemSaveDto.builder()
+                .itemName("아이템 삭제 테스트")
+                .agencyId(1L)
+                .agencyName("A투어")
+                .location("뉴욕")
+                .price(99999)
+                .departureDate(LocalDateTime.now())
+                .arrivalDate(LocalDateTime.now())
+                .description("삭제 테스트입니다.")
+                .build();
+        Item item = itemSave.toEntity();
+        itemMapper.save(item);
 
-    @Test
-    void findById() {
+        itemMapper.deleteById(item.getItemId());
+
+        assertThat(itemMapper.findById(item.getItemId()).orElse(null)).isNull();
     }
 
     @Test

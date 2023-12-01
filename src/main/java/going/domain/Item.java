@@ -1,5 +1,6 @@
 package going.domain;
 
+import going.model.item.ItemResponseDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -11,30 +12,42 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item {
 
-    private Long item_id;
-    private Long agency_id;
-    private String item_name;
-    private String agency_name;
+    private Long itemId;
+    private Long agencyId;
+    private String itemName;
+    private String agencyName;
     private String location;
     private int price;
     private String description;
-    private LocalDateTime departure_date;
-    private LocalDateTime arrival_date;
-    private int like_count;
-    private int delete_yn;
+    private LocalDateTime departureDate;
+    private LocalDateTime arrivalDate;
+    private int likeCount;
 
     @Builder
-    public Item(Long item_id, Long agency_id, String item_name, String agency_name, String location, int price, String description, LocalDateTime departure_date, LocalDateTime arrival_date, int like_count, int delete_yn) {
-        this.item_id = item_id;
-        this.agency_id = agency_id;
-        this.item_name = item_name;
-        this.agency_name = agency_name;
+    public Item(Long itemId, Long agencyId, String itemName, String agencyName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate, int likeCount) {
+        this.itemId = itemId;
+        this.agencyId = agencyId;
+        this.itemName = itemName;
+        this.agencyName = agencyName;
         this.location = location;
         this.price = price;
         this.description = description;
-        this.departure_date = departure_date;
-        this.arrival_date = arrival_date;
-        this.like_count = like_count;
-        this.delete_yn = delete_yn;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+        this.likeCount = likeCount;
+    }
+
+    public ItemResponseDto toDto() {
+        return ItemResponseDto.builder()
+                .itemId(itemId)
+                .itemName(itemName)
+                .agencyName(agencyName)
+                .location(location)
+                .price(price)
+                .description(description)
+                .departureDate(departureDate)
+                .arrivalDate(arrivalDate)
+                .likeCount(likeCount)
+                .build();
     }
 }

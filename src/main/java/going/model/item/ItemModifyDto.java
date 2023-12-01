@@ -1,31 +1,45 @@
 package going.model.item;
 
+import going.domain.Item;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ItemModifyDto {
 
-    private Long item_id;
-    private String item_name;
+    private Long itemId;
+    private String itemName;
     private String location;
     private int price;
     private String description;
-    private LocalDateTime departure_date;
-    private LocalDateTime arrival_date;
+    private LocalDateTime departureDate;
+    private LocalDateTime arrivalDate;
 
     @Builder
-    public ItemModifyDto(Long item_id, String item_name, String location, int price, String description, LocalDateTime departure_date, LocalDateTime arrival_date) {
-        this.item_id = item_id;
-        this.item_name = item_name;
+    public ItemModifyDto(Long itemId, String itemName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate) {
+        this.itemId = itemId;
+        this.itemName = itemName;
         this.location = location;
         this.price = price;
         this.description = description;
-        this.departure_date = departure_date;
-        this.arrival_date = arrival_date;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+    }
+
+    public Item toEntity() {
+        return Item.builder()
+                .itemId(itemId)
+                .itemName(itemName)
+                .location(location)
+                .price(price)
+                .description(description)
+                .departureDate(departureDate)
+                .arrivalDate(arrivalDate)
+                .build();
     }
 }

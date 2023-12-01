@@ -1,17 +1,18 @@
 package going.model.item;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Getter
-@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ItemDeleteDto {
 
-    private Long item_id;
+    private Long itemId;
 
     @Builder
-    public ItemDeleteDto(Long item_id) {
-        this.item_id = item_id;
+    public ItemDeleteDto(Long itemId) {
+        this.itemId = itemId;
     }
 }
