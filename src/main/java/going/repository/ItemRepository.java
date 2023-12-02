@@ -1,6 +1,7 @@
 package going.repository;
 
 import going.domain.Item;
+import going.model.common.SearchDto;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ public interface ItemRepository {
 
     Optional<Item> findById(Long id);
 
-    List<Item> findAll();
+    List<Item> findAll(final SearchDto params);
 
-//    int count();
+    int count(final SearchDto params);
 }

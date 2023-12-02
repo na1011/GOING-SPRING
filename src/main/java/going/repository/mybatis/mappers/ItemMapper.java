@@ -18,7 +18,7 @@ public interface ItemMapper {
 
     Optional<Item> findById(Long id);
 
-    List<Item> findAll(SearchDto params);
+    List<Item> findAll(final SearchDto params);
 
-    int count(SearchDto params);
+    int count(final SearchDto params);
 }

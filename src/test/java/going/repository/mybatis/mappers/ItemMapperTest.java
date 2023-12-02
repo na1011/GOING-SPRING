@@ -1,6 +1,8 @@
 package going.repository.mybatis.mappers;
 
 import going.domain.Item;
+import going.model.common.Paging;
+import going.model.common.SearchDto;
 import going.model.item.ItemModifyDto;
 import going.model.item.ItemSaveDto;
 import org.junit.jupiter.api.Test;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +25,7 @@ class ItemMapperTest {
         ItemSaveDto itemSave = ItemSaveDto.builder()
                 .itemName("아이템 맵퍼 테스트")
                 .agencyId(1L)
-                .agencyName("A투어")
+                .agencyName("1번투어")
                 .location("뉴욕")
                 .price(99999)
                 .departureDate(LocalDateTime.now())
@@ -40,7 +43,7 @@ class ItemMapperTest {
     @Test
     void update() {
         ItemModifyDto itemModify = ItemModifyDto.builder()
-                .itemId(18L)
+                .itemId(6L)
                 .itemName("아이템 수정 테스트")
                 .arrivalDate(LocalDateTime.now())
                 .departureDate(LocalDateTime.now())
@@ -79,5 +82,16 @@ class ItemMapperTest {
 
     @Test
     void findAll() {
+        SearchDto params = new SearchDto();
+        params.setPage(1);
+
+        int totalData = itemMapper.count(params);
+        Paging paging = new Paging(totalData, params);
+        params.setPaging(paging);
+
+        List<Item> findAll = itemMapper.findAll(params);
+
+        assertThat(findAll.size()).isEqualTo(3);
     }
+
 }

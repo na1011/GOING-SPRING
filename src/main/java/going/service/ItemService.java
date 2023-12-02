@@ -2,11 +2,15 @@ package going.service;
 
 import going.common.exception.BadRequestException;
 import going.domain.Item;
+import going.model.common.Paging;
+import going.model.common.PagingResponseDto;
+import going.model.common.SearchDto;
 import going.model.item.ItemResponseDto;
 import going.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +31,21 @@ public class ItemService {
         return findItem.toDto();
     }
 
-    public List<ItemResponseDto> findAll() {
-        return itemRepository.findAll().stream()
-                .map(Item::toDto).toList();
+    public PagingResponseDto<ItemResponseDto> findAll(final SearchDto params) {
+
+        int totalCount = itemRepository.count(params);
+        if (totalCount < 1) {
+            return new PagingResponseDto<>(Collections.emptyList(), null);
+        }
+
+        Paging paging = new Paging(totalCount, params);
+        params.setPaging(paging);
+
+        List<ItemResponseDto> findAll = itemRepository.findAll(params)
+                .stream()
+                .map(Item::toDto)
+                .toList();
+
+        return new PagingResponseDto<>(findAll, paging);
     }
 }

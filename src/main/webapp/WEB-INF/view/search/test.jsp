@@ -17,6 +17,9 @@
         <p>${item.itemName}</p>
         <p>${item.price}</p>
     </c:forEach>
+    <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
+        <b>${num}, </b>
+    </c:forEach>
 </c:if>
 <c:if test="${itemDetail != null}">
     <p>${itemDetail.itemName}</p>

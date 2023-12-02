@@ -1,6 +1,7 @@
 package going.repository.mybatis;
 
 import going.domain.Item;
+import going.model.common.SearchDto;
 import going.repository.ItemRepository;
 import going.repository.mybatis.mappers.ItemMapper;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,12 @@ public class ItemRepositoryMybatis implements ItemRepository {
     }
 
     @Override
-    public List<Item> findAll() {
-        return itemMapper.findAll();
+    public List<Item> findAll(final SearchDto params) {
+        return itemMapper.findAll(params);
+    }
+
+    @Override
+    public int count(final SearchDto params) {
+        return itemMapper.count(params);
     }
 }
