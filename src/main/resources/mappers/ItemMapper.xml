@@ -3,7 +3,7 @@
 
 <mapper namespace="going.repository.mybatis.mappers.ItemMapper">
 
-    <sql id="itemView">
+    <sql id="itemResponse">
         select ITEM_ID,
                ITEM_NAME,
                AGENCY_NAME,
@@ -14,6 +14,36 @@
                ARRIVAL_DATE,
                LIKE_COUNT
         from TRAVEL_ITEM
+        where DELETE_YN = 0
+    </sql>
+
+    <sql id="search">
+        <!-- 검색어가 있을 때 -->
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <!-- 검색 유형이 하나일 때 -->
+                <when test="searchType != null and searchType != ''">
+                    <choose>
+                        <when test="'title'.equals(searchType)">
+                            and item_name like '%' || #{keyword} || '%'
+                        </when>
+                        <when test="'location'.equals(searchType)">
+                            and location like '%' || #{keyword} || '%'
+                        </when>
+                        <when test="'agency'.equals(searchType)">
+                            and agency_name like '%' || #{keyword} || '%'
+                        </when>
+                    </choose>
+                </when>
+                <otherwise>
+                <!-- 전체 검색일 때 -->
+                    and (item_name like '%' || #{keyword} || '%'
+                    or location like '%' || #{keyword} || '%'
+                    or agency_name like '%' || #{keyword} || '%'
+                    )
+                </otherwise>
+            </choose>
+        </if>
     </sql>
 
     <!-- 아이템 저장 -->
@@ -33,9 +63,7 @@
 
     <!-- 아이템 조회 -->
     <select id="findById" resultType="going.domain.Item" parameterType="long">
-        select *
-        from TRAVEL_ITEM
-        where DELETE_YN = 0
+        <include refid="itemResponse" />
           and ITEM_ID = #{itemId}
     </select>
 
@@ -61,13 +89,16 @@
 
     <!-- 아이템 리스트 조회 -->
     <select id="findAll" parameterType="going.model.common.SearchDto" resultType="going.domain.Item">
-    <![CDATA[
+
         select *
         from (select a.*, ROWNUM as rnum
-              from (select * from TRAVEL_ITEM where DELETE_YN = 0 order by ITEM_ID desc) a)
+              from (<include refid="itemResponse" />
+                    <include refid="search" />
+                    order by ITEM_ID desc) a)
+        <![CDATA[
         where rnum >= #{paging.startIndex}
           and rnum <= #{paging.endIndex}
-    ]]>
+        ]]>
     </select>
 
     <!-- 게시글 총 갯수 카운팅 -->
@@ -75,5 +106,6 @@
         select count(*)
         from TRAVEL_ITEM
         where DELETE_YN = 0
+        <include refid="search" />
     </select>
 </mapper>

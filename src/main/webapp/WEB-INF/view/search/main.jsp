@@ -32,8 +32,9 @@
                     <!-- Start Single Widget -->
                     <div class="single-widget search">
                         <h3>상세조건</h3>
-                        <form action="/search/result" method="get">
-                            <input type="text" name="searchTitle" placeholder="지역, 패키지명...">
+                        <form method="get" id="searchForm">
+                            <input type="hidden" name="searchType" value="title">
+                            <input type="text" name="keyword" placeholder="지역, 패키지명...">
                             <button type="submit"><i class="lni lni-search-alt"></i></button>
                         </form>
                     </div>
@@ -167,8 +168,8 @@
                             <div class="category-grid-topbar">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <h3 class="title">발견된 ${paging.allSize}개의 항목
-                                            중 ${paging.startIndex }-${paging.endIndex }개를 보여줍니다</h3>
+                                        <h3 class="title">발견된 ${paging.totalData}개의 항목
+                                            중 ${paging.startIndex}-${paging.endIndex}번 째를 보여줍니다</h3>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <nav>
@@ -195,7 +196,7 @@
                                                     <div class="row align-items-center">
                                                         <div class="col-lg-5 col-md-7 col-12">
                                                             <div class="image">
-                                                                <a href="/item/detail/${trv.id}"><img
+                                                                <a href="/item/detail/${trv.itemId}"><img
                                                                         src="${pageContext.request.contextPath}/resources/images/search/japan.png"
                                                                         alt="#"></a>
                                                                 <i class=" cross-badge lni lni-bolt"></i>
@@ -206,17 +207,17 @@
                                                             <div class="content">
                                                                 <a href="javascript:void(0)" class="tag">해외여행</a>
                                                                 <h3 class="title">
-                                                                    <a href="/item/detail/${trv.id}">${trv.itemName}</a>
+                                                                    <a href="/search/detail/${trv.itemId}">${trv.itemName}</a>
                                                                 </h3>
                                                                 <p class="location"><a
-                                                                        href="/item/detail/${trv.id}">
+                                                                        href="/search/detail/${trv.itemId}">
                                                                     <i class="lni lni-map-marker">
-                                                                    </i>삿포로,오타루,후라노,비에이</a></p>
+                                                                    </i>${trv.location}</a></p>
                                                                 <ul class="info">
                                                                     <li class="price"><fmt:formatNumber
                                                                             value="${trv.price}" pattern="#,###"/>원
                                                                     </li>
-                                                                    <c:if test="${sessionScope.loginMember eq null or !trv.likedBy.contains(sessionScope.loginMember)}">
+                                           <%--                         <c:if test="${sessionScope.loginMember eq null or !trv.likedBy.contains(sessionScope.loginMember)}">
                                                                         <li id="like${trv.id}" class="like"><a
                                                                                 href="javascript:void(0)"
                                                                                 onclick="heartCheck(${trv.id})"><i
@@ -228,7 +229,7 @@
                                                                                 href="javascript:void(0)"
                                                                                 onclick="heartCheck(${trv.id})"><i
                                                                                 class="lni lni-heart"></i></a></li>
-                                                                    </c:if>
+                                                                    </c:if>--%>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -246,23 +247,37 @@
                                             <!-- 페이징 시작 -->
                                             <div class="pagination center">
                                                 <ul class="pagination-list">
-                                                    <c:if test="${paging.prev}">
+                                                    <c:if test="${paging.prevPage}">
                                                         <li><a href="/search/main?page=${paging.startPage - 1}"><i
                                                                 class="lni lni-chevron-left"></i></a></li>
                                                     </c:if>
 
-                                                    <c:forEach var="num" begin="${paging.startPage }"
-                                                               end="${paging.endPage}">
-                                                        <c:if test="${paging.page != num}">
-                                                            <li><a href="/search/main?page=${num}">${num}</a></li>
-                                                        </c:if>
-                                                        <c:if test="${paging.page == num}">
-                                                            <li class="active"><a
-                                                                    href="/search/main?page=${num}">${num}</a></li>
-                                                        </c:if>
-                                                    </c:forEach>
+                                                    <c:choose>
+                                                        <c:when test="${params.searchType != null}">
+                                                            <c:forEach var="num" begin="${paging.startPage}"
+                                                                       end="${paging.endPage}">
+                                                                <c:if test="${params.page != num}">
+                                                                    <li><a href="/search/main?page=${num}&searchType=${params.searchType}&keyword=${params.keyword}">${num}</a></li>
+                                                                </c:if>
+                                                                <c:if test="${params.page == num}">
+                                                                    <li><a href="/search/main?page=${num}&searchType=${params.searchType}&keyword=${params.keyword}">${num}</a></li>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <c:forEach var="num" begin="${paging.startPage}"
+                                                                       end="${paging.endPage}">
+                                                                <c:if test="${params.page != num}">
+                                                                    <li><a href="/search/main?page=${num}">${num}</a></li>
+                                                                </c:if>
+                                                                <c:if test="${params.page == num}">
+                                                                    <li><a href="/search/main?page=${num}">${num}</a></li>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </c:otherwise>
+                                                    </c:choose>
 
-                                                    <c:if test="${paging.next}">
+                                                    <c:if test="${paging.nextPage}">
                                                         <li><a href="/search/main?page=${paging.endPage + 1}"><i
                                                                 class="lni lni-chevron-right"></i></a></li>
                                                     </c:if>
@@ -281,7 +296,28 @@
     </div>
 </section>
 <!-- End Category 마지막 라인-->
+
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        console.log('document ready 실행')
+
+        if (!location.search) {
+            return false;
+        }
+
+        const form = document.getElementById('searchForm');
+
+        new URLSearchParams(location.search).forEach((value, key) => {
+            if (form[key]) {
+                form[key].value = value;
+            }
+        })
+    });
+</script>
+
+<%--
 <script type="text/javascript">
     function heartCheck(itemId) {
         $.ajax({
@@ -302,7 +338,7 @@
             }
         });
     }
-</script>
+</script>--%>
 
 <%@ include file="/WEB-INF/common/footer.jsp" %>
  	

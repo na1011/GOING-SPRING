@@ -94,4 +94,19 @@ class ItemMapperTest {
         assertThat(findAll.size()).isEqualTo(3);
     }
 
+    @Test
+    void searchKeyword() {
+        SearchDto params = new SearchDto();
+        params.setPage(1);
+        params.setSearchType("agency");
+        params.setKeyword("10번투어");
+
+        int totalData = itemMapper.count(params);
+        Paging paging = new Paging(totalData, params);
+        params.setPaging(paging);
+
+        List<Item> findAll = itemMapper.findAll(params);
+
+        assertThat(findAll.get(0).getAgencyName()).isEqualTo("10번투어");
+    }
 }

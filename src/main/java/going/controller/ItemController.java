@@ -25,16 +25,17 @@ public class ItemController {
         ItemResponseDto findById = itemService.findById(itemId);
         model.addAttribute("itemDetail", findById);
 
-        return "search/test";
+        return "search/detail";
     }
 
     @GetMapping("/main")
-    public String itemMain(@ModelAttribute("params") SearchDto params, Model model) {
+    public String itemMain(@ModelAttribute("params") final SearchDto params, Model model) {
 
         PagingResponseDto<ItemResponseDto> result = itemService.findAll(params);
         model.addAttribute("itemList", result.getList());
+        model.addAttribute("params", params);
         model.addAttribute("paging", result.getPaging());
 
-        return "search/test";
+        return "search/main";
     }
 }
