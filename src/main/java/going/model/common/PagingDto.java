@@ -3,7 +3,7 @@ package going.model.common;
 import lombok.Getter;
 
 @Getter
-public class Paging {
+public class PagingDto {
 
     private int totalData;       // 전체 데이터 수
     private int totalPage;       // 전체 페이지 수
@@ -14,7 +14,7 @@ public class Paging {
     private boolean prevPage;    // 이전 페이지 존재 여부
     private boolean nextPage;    // 다음 페이지 존재 여부
 
-    public Paging(int totalData, SearchDto params) {
+    public PagingDto(int totalData, SearchDto params) {
         if (totalData > 0) {
             this.totalData = totalData;
             calculation(params);

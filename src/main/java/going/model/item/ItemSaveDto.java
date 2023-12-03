@@ -1,15 +1,12 @@
 package going.model.item;
 
 import going.domain.Item;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ItemSaveDto {
 
     private Long agencyId;
@@ -20,6 +17,9 @@ public class ItemSaveDto {
     private String description;
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
+
+    public ItemSaveDto() {
+    }
 
     @Builder
     public ItemSaveDto(Long agencyId, String itemName, String agencyName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate) {

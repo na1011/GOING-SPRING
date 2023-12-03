@@ -74,8 +74,8 @@
                                     </div>
                                 </nav>
 
-                                <form:form modelAttribute="itemRegisterForm"
-                                        class="default-form-style" method="post" action="/myPage/register">
+                                <form:form modelAttribute="itemSaveDto"
+                                        class="default-form-style" method="post" action="/search/register">
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="nav-item-info" role="tabpanel"
                                              aria-labelledby="nav-item-info-tab">
@@ -154,7 +154,7 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>주소*</label>
-                                                            <input name="주소" type="text" placeholder="주소를 입력해주세요"/>
+                                                            <input name="location" type="text" placeholder="주소를 입력해주세요"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -369,8 +369,8 @@
                                                         <div class="form-group">
                                                             <label>출발일자*</label>
                                                             <td class="td_KYS">
-                                                                <input type="date" id="travel_date"
-                                                                       name="travel_date"/>
+                                                                <input type="date" id="departureDate"
+                                                                       name="departureDate"/>
                                                             </td>
                                                         </div>
                                                     </div>
@@ -378,8 +378,8 @@
                                                         <div class="form-group">
                                                             <label>도착일자*</label>
                                                             <td class="td_KYS">
-                                                                <input type="date" id="travel_date"
-                                                                       name="travel_date"/>
+                                                                <input type="date" id="arrivalDate"
+                                                                       name="arrivalDate"/>
                                                             </td>
                                                         </div>
                                                     </div>

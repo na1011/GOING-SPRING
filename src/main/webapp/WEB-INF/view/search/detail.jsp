@@ -63,8 +63,7 @@
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="product-info">
                         <h2 class="title">${itemDetail.itemName }</h2>
-                        <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">여행지,
-                            국가이름</a></p>
+                        <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">${itemDetail.location}</a></p>
                         <h3 class="price">$<fmt:formatNumber value="${itemDetail.price}" pattern="#,###"/></h3>
                         <div class="list-info">
                             <h4>여행일정</h4>

@@ -1,7 +1,7 @@
 package going.repository.mybatis.mappers;
 
 import going.domain.Item;
-import going.model.common.Paging;
+import going.model.common.PagingDto;
 import going.model.common.SearchDto;
 import going.model.item.ItemModifyDto;
 import going.model.item.ItemSaveDto;
@@ -86,7 +86,7 @@ class ItemMapperTest {
         params.setPage(1);
 
         int totalData = itemMapper.count(params);
-        Paging paging = new Paging(totalData, params);
+        PagingDto paging = new PagingDto(totalData, params);
         params.setPaging(paging);
 
         List<Item> findAll = itemMapper.findAll(params);
@@ -102,7 +102,7 @@ class ItemMapperTest {
         params.setKeyword("10번투어");
 
         int totalData = itemMapper.count(params);
-        Paging paging = new Paging(totalData, params);
+        PagingDto paging = new PagingDto(totalData, params);
         params.setPaging(paging);
 
         List<Item> findAll = itemMapper.findAll(params);

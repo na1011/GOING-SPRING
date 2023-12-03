@@ -168,8 +168,8 @@
                             <div class="category-grid-topbar">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6 col-md-6 col-12">
-                                        <h3 class="title">발견된 ${paging.totalData}개의 항목
-                                            중 ${paging.startIndex}-${paging.endIndex}번 째를 보여줍니다</h3>
+                                        <h3 class="title">발견된 ${params.paging.totalData}개의 항목
+                                            중 ${params.paging.startIndex}-${params.paging.endIndex}번 째를 보여줍니다</h3>
                                     </div>
                                     <div class="col-lg-6 col-md-6 col-12">
                                         <nav>
@@ -247,15 +247,15 @@
                                             <!-- 페이징 시작 -->
                                             <div class="pagination center">
                                                 <ul class="pagination-list">
-                                                    <c:if test="${paging.prevPage}">
-                                                        <li><a href="/search/main?page=${paging.startPage - 1}"><i
+                                                    <c:if test="${params.paging.prevPage}">
+                                                        <li><a href="/search/main?page=${params.paging.startPage - 1}"><i
                                                                 class="lni lni-chevron-left"></i></a></li>
                                                     </c:if>
 
                                                     <c:choose>
                                                         <c:when test="${params.searchType != null}">
-                                                            <c:forEach var="num" begin="${paging.startPage}"
-                                                                       end="${paging.endPage}">
+                                                            <c:forEach var="num" begin="${params.paging.startPage}"
+                                                                       end="${params.paging.endPage}">
                                                                 <c:if test="${params.page != num}">
                                                                     <li><a href="/search/main?page=${num}&searchType=${params.searchType}&keyword=${params.keyword}">${num}</a></li>
                                                                 </c:if>
@@ -265,8 +265,8 @@
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <c:forEach var="num" begin="${paging.startPage}"
-                                                                       end="${paging.endPage}">
+                                                            <c:forEach var="num" begin="${params.paging.startPage}"
+                                                                       end="${params.paging.endPage}">
                                                                 <c:if test="${params.page != num}">
                                                                     <li><a href="/search/main?page=${num}">${num}</a></li>
                                                                 </c:if>
@@ -277,8 +277,8 @@
                                                         </c:otherwise>
                                                     </c:choose>
 
-                                                    <c:if test="${paging.nextPage}">
-                                                        <li><a href="/search/main?page=${paging.endPage + 1}"><i
+                                                    <c:if test="${params.paging.nextPage}">
+                                                        <li><a href="/search/main?page=${params.paging.endPage + 1}"><i
                                                                 class="lni lni-chevron-right"></i></a></li>
                                                     </c:if>
                                                 </ul>
