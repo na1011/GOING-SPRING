@@ -6,11 +6,13 @@ import going.model.member.MemberResponseDto;
 import going.model.member.MemberSaveDto;
 import going.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class MemberService {
 
@@ -19,6 +21,7 @@ public class MemberService {
 
     @Transactional
     public String saveMember(MemberSaveDto params) {
+
         params.encodingPassword(passwordEncoder);
         Member saveMember = params.toEntity();
 
@@ -26,8 +29,18 @@ public class MemberService {
     }
 
     public MemberResponseDto login(MemberLoginDto params) {
-        Member findByEmail = memberRepository.findByEmail(params.getEmail()).orElseThrow(() -> new NullPointerException("로그인 실패"));
+        Member findByEmail = memberRepository.findByEmail(params.getEmail()).orElseThrow(() -> new NullPointerException("잘못된 이메일 주소입니다."));
+        String encodedPassword = (findByEmail == null) ? "" : findByEmail.getPassword();
+
+        if ((findByEmail == null) || !passwordEncoder.matches(params.getPassword(), encodedPassword)) {
+            log.info("서비스단 로그인 실패 = {}", encodedPassword);
+            return null;
+        }
 
         return findByEmail.toDto();
+    }
+
+    public int validateEmail(String email) {
+        return memberRepository.countByEmail(email);
     }
 }

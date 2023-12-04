@@ -38,7 +38,9 @@
     </delete>
     
     <!-- 중복 체크 -->
-    <select id="countMemberByEmail" resultType="int">
-        select
+    <select id="countByEmail" parameterType="string" resultType="int">
+        select EMAIL
+        from MEMBER
+        where EMAIL = #{email}
     </select>
 </mapper>

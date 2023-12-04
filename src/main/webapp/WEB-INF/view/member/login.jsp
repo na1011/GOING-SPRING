@@ -86,6 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="button">
+                                    <input type="hidden" name="addr" class="addr">
                                     <button type="submit" class="btn mt-3">로그인</button>
                                 </div>
                                 <div class="alt-option">
@@ -154,6 +155,10 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $('.addr').val(location.search.substring(1));
+    })
+
     $(document).ready(function () {
         $('.d1').show(); //페이지를 로드할 때 표시할 요소
         $('.d2').hide(); //페이지를 로드할 때 숨길 요소

@@ -1,6 +1,8 @@
 package going.controller;
 
 import going.common.ConstField;
+import going.common.resolver.Login;
+import going.model.common.MessageDto;
 import going.model.member.MemberLoginDto;
 import going.model.member.MemberResponseDto;
 import going.model.member.MemberSaveDto;
@@ -11,11 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Slf4j
@@ -26,42 +24,49 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/login")
-    public String viewLogin() {
-
-
-       /* if (loginMember != null) {
+    public String viewLogin(@Login MemberResponseDto loginMember) {
+        if (loginMember != null) {
             return "redirect:/";
-        }*/
+        }
         return "member/login";
     }
 
     @PostMapping("/login")
-    public String login(@ModelAttribute MemberLoginDto params, BindingResult bindingResult, HttpServletRequest request, Model model) {
+    public String login(@ModelAttribute MemberLoginDto params, HttpServletRequest request, Model model) {
 
         MemberResponseDto loginMember = memberService.login(params);
 
         if (loginMember == null) {
-            model.addAttribute("msg", "아이디 또는 비밀번호 오류입니다.");
-            model.addAttribute("url", "/member/login");
+            MessageDto message = new MessageDto("아이디 또는 비밀번호 오류입니다.", "/member/login?" + params.getAddr());
+            model.addAttribute("message", message);
+            log.info("메세지 보내기 = {}", message.getMessage());
             return "alert";
         }
 
         HttpSession session = request.getSession();
         session.setAttribute(ConstField.LOGIN_MEMBER, loginMember);
-        return "redirect:/";
+        session.setMaxInactiveInterval(60 * 30);    // 30분
+
+        return params.getAddr() == null ? "redirect:/" : "redirect:" + params.getAddr();
     }
 
     @GetMapping("/register")
-    public String viewRegister(@ModelAttribute MemberSaveDto params) {
+    public String viewRegister(Model model) {
+        model.addAttribute("MemberSaveDto", new MemberSaveDto());
         return "member/register";
     }
 
     @PostMapping("/register")
     public String memberRegister(@ModelAttribute MemberSaveDto params) {
-
+        log.info("가입양식 = {}", params);
         String userName = memberService.saveMember(params);
-
         return "redirect:/member/login";
+    }
+
+    @ResponseBody
+    @GetMapping("/validation")
+    public int validateEamil(@RequestParam("email") String email) {
+        return memberService.validateEmail(email);
     }
 
     @RequestMapping("/logout")

@@ -34,4 +34,9 @@ public class MemberRepositoryMybatis implements MemberRepository {
     public Optional<Member> findByEmail(String email) {
         return memberMapper.findByEmail(email);
     }
+
+    @Override
+    public int countByEmail(String email) {
+        return memberMapper.countByEmail(email);
+    }
 }

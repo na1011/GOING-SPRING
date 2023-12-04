@@ -68,7 +68,7 @@
                         </nav>
                     </div>
                     <div class="d1">
-                        <form:form modelAttribute="memberSaveDto"
+                        <form:form modelAttribute="MemberSaveDto"
                                 action="/member/register" method="post"
                               style=" border: 1px solid #c9c9c9; border-top: none; padding: 40px;">
                             <div style="margin:  10px;">

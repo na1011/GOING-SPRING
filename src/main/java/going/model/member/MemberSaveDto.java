@@ -1,14 +1,15 @@
 package going.model.member;
 
 import going.domain.Member;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 
 @Getter
 @Setter
+@ToString
 public class MemberSaveDto {
 
     private String email;
@@ -17,14 +18,6 @@ public class MemberSaveDto {
     private String userName;
 
     public MemberSaveDto() {
-    }
-
-    @Builder
-    public MemberSaveDto(String email, String password, String phone, String userName) {
-        this.email = email;
-        this.password = password;
-        this.phone = phone;
-        this.userName = userName;
     }
 
     public void encodingPassword(PasswordEncoder passwordEncoder) {

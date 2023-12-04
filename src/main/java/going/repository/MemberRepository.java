@@ -13,4 +13,6 @@ public interface MemberRepository {
     void deleteByEmail(String email);
 
     Optional<Member> findByEmail(String email);
+
+    int countByEmail(String email);
 }
