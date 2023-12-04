@@ -156,7 +156,7 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('.addr').val(location.search.substring(1));
+        $('.addr').val(location.search.substring(1)).attr("disabled", false);
     })
 
     $(document).ready(function () {

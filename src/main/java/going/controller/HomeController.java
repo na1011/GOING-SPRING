@@ -1,8 +1,10 @@
 package going.controller;
 
+import going.model.common.MessageDto;
 import going.model.item.ItemResponseDto;
 import going.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.message.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,5 +25,12 @@ public class HomeController {
         model.addAttribute("priceList", priceList);
         model.addAttribute("popularList", popularList);
         return "index";
+    }
+
+    @GetMapping("/alert")
+    public String alert(Model model) {
+        MessageDto message = new MessageDto("잘못된 요청입니다.", "/");
+        model.addAttribute("message", message);
+        return "alert";
     }
 }

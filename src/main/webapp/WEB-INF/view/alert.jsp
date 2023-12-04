@@ -9,12 +9,6 @@
         window.onload = () => {
             alert('${message.message}');
             location.href = '${message.redirectURI}';
-
-            /*const form = document.getElementById('redirectForm');
-            if (form) {
-                form.submit();
-                return false;
-            }*/
         }
     </script>
 </body>

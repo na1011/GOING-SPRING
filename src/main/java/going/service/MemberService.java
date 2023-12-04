@@ -33,7 +33,6 @@ public class MemberService {
         String encodedPassword = (findByEmail == null) ? "" : findByEmail.getPassword();
 
         if ((findByEmail == null) || !passwordEncoder.matches(params.getPassword(), encodedPassword)) {
-            log.info("서비스단 로그인 실패 = {}", encodedPassword);
             return null;
         }
 

@@ -31,6 +31,15 @@
             rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        function loginHref() {
+            if(location.pathname === '/member/login') {
+                location.href = '/member/login';
+            } else {
+                location.href = '/member/login?' + location.pathname + location.search;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -95,8 +104,8 @@
                                 <c:if test="${sessionScope.loginMember == null}">
                                     <li>
                                         <a href="javascript:void(0)"
-                                           onclick="location.href = '/member/login?' + location.pathname + location.search"><i
-                                                class="lni lni-enter"></i> 로그인</a>
+                                           onclick="loginHref()">
+                                            <i class="lni lni-enter"></i> 로그인</a>
                                     </li>
 
                                     <li>

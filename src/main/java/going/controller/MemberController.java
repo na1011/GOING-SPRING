@@ -39,7 +39,6 @@ public class MemberController {
         if (loginMember == null) {
             MessageDto message = new MessageDto("아이디 또는 비밀번호 오류입니다.", "/member/login?" + params.getAddr());
             model.addAttribute("message", message);
-            log.info("메세지 보내기 = {}", message.getMessage());
             return "alert";
         }
 
@@ -58,7 +57,6 @@ public class MemberController {
 
     @PostMapping("/register")
     public String memberRegister(@ModelAttribute MemberSaveDto params) {
-        log.info("가입양식 = {}", params);
         String userName = memberService.saveMember(params);
         return "redirect:/member/login";
     }
