@@ -98,8 +98,8 @@ class ItemMapperTest {
     void searchKeyword() {
         SearchDto params = new SearchDto();
         params.setPage(1);
-        params.setSearchType("agency");
-        params.setKeyword("10번투어");
+        params.setSearchType("title");
+        params.setKeyword("10번째");
 
         int totalData = itemMapper.count(params);
         PagingDto paging = new PagingDto(totalData, params);
@@ -107,6 +107,50 @@ class ItemMapperTest {
 
         List<Item> findAll = itemMapper.findAll(params);
 
-        assertThat(findAll.get(0).getAgencyName()).isEqualTo("10번투어");
+        assertThat(findAll.get(0).getItemName()).isEqualTo("10번째 아이템");
     }
+
+    @Test
+    void orderBy() {
+        List<Item> likeList = itemMapper.orderByLike();
+        List<Item> priceList = itemMapper.orderByPrice();
+
+        assertThat(priceList.get(9).getPrice()).isEqualTo(11111);
+        assertThat(likeList.get(9).getLikeCount()).isEqualTo(0);
+    }
+
+
+//    @Test
+//    void dataInit() {
+//        for (int i = 1; i < 50; i++) {
+//            if (i % 2 == 0) {
+//                ItemSaveDto itemSave = ItemSaveDto.builder()
+//                        .itemName(i + "번째 아이템")
+//                        .agencyId(1L)
+//                        .agencyName("A투어")
+//                        .location("뉴욕")
+//                        .price(99999)
+//                        .departureDate(LocalDateTime.now())
+//                        .arrivalDate(LocalDateTime.now())
+//                        .description(i + "번 상품 등록 테스트")
+//                        .build();
+//                Item item = itemSave.toEntity();
+//                itemMapper.save(item);
+//
+//            } else {
+//                ItemSaveDto itemSave = ItemSaveDto.builder()
+//                        .itemName(i + "번째 아이템")
+//                        .agencyId(2L)
+//                        .agencyName("B투어")
+//                        .location("도쿄")
+//                        .price(11111)
+//                        .departureDate(LocalDateTime.now())
+//                        .arrivalDate(LocalDateTime.now())
+//                        .description(i + "번 상품 등록 테스트")
+//                        .build();
+//                Item item = itemSave.toEntity();
+//                itemMapper.save(item);
+//            }
+//        }
+//    }
 }

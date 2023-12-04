@@ -46,4 +46,14 @@ public class ItemRepositoryMybatis implements ItemRepository {
     public int count(final SearchDto params) {
         return itemMapper.count(params);
     }
+
+    @Override
+    public List<Item> orderByPrice() {
+        return itemMapper.orderByPrice();
+    }
+
+    @Override
+    public List<Item> orderByLike() {
+        return itemMapper.orderByLike();
+    }
 }

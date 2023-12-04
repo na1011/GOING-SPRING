@@ -22,7 +22,7 @@
     <logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
 
     <!-- sql 쿼리문을 표 형식으로 콘솔에 출력 -->
-<!--    <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />-->
+    <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />
 
     <logger name="org.springframework" level="INFO" appender-ref="console-infolog" />
     <logger name="org.apache" level="INFO" appender-ref="console-infolog" />

@@ -196,7 +196,7 @@
                                                     <div class="row align-items-center">
                                                         <div class="col-lg-5 col-md-7 col-12">
                                                             <div class="image">
-                                                                <a href="/item/detail/${trv.itemId}"><img
+                                                                <a href="javascript:void(0)" onclick="goDetail(${trv.itemId})"><img
                                                                         src="${pageContext.request.contextPath}/resources/images/search/japan.png"
                                                                         alt="#"></a>
                                                                 <i class=" cross-badge lni lni-bolt"></i>
@@ -207,10 +207,9 @@
                                                             <div class="content">
                                                                 <a href="javascript:void(0)" class="tag">해외여행</a>
                                                                 <h3 class="title">
-                                                                    <a href="/search/detail/${trv.itemId}">${trv.itemName}</a>
+                                                                    <a href="javascript:void(0)" onclick="goDetail(${trv.itemId})">${trv.itemName}</a>
                                                                 </h3>
-                                                                <p class="location"><a
-                                                                        href="/search/detail/${trv.itemId}">
+                                                                <p class="location"><a href="javascript:void(0)" onclick="goDetail(${trv.itemId})">
                                                                     <i class="lni lni-map-marker">
                                                                     </i>${trv.location}</a></p>
                                                                 <ul class="info">
@@ -248,37 +247,21 @@
                                             <div class="pagination center">
                                                 <ul class="pagination-list">
                                                     <c:if test="${params.paging.prevPage}">
-                                                        <li><a href="/search/main?page=${params.paging.startPage - 1}"><i
+                                                        <li><a href="javascript:void(0)" onclick="movePage(${params.paging.startPage - 1})"><i
                                                                 class="lni lni-chevron-left"></i></a></li>
                                                     </c:if>
 
-                                                    <c:choose>
-                                                        <c:when test="${params.searchType != null}">
-                                                            <c:forEach var="num" begin="${params.paging.startPage}"
-                                                                       end="${params.paging.endPage}">
-                                                                <c:if test="${params.page != num}">
-                                                                    <li><a href="/search/main?page=${num}&searchType=${params.searchType}&keyword=${params.keyword}">${num}</a></li>
-                                                                </c:if>
-                                                                <c:if test="${params.page == num}">
-                                                                    <li><a href="/search/main?page=${num}&searchType=${params.searchType}&keyword=${params.keyword}">${num}</a></li>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <c:forEach var="num" begin="${params.paging.startPage}"
-                                                                       end="${params.paging.endPage}">
-                                                                <c:if test="${params.page != num}">
-                                                                    <li><a href="/search/main?page=${num}">${num}</a></li>
-                                                                </c:if>
-                                                                <c:if test="${params.page == num}">
-                                                                    <li><a href="/search/main?page=${num}">${num}</a></li>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </c:otherwise>
-                                                    </c:choose>
+                                                    <c:forEach var="num" begin="${params.paging.startPage}" end="${params.paging.endPage}">
+                                                        <c:if test="${params.page != num}">
+                                                            <li><a href="javascript:void(0)" onclick="movePage(${num})">${num}</a></li>
+                                                        </c:if>
+                                                        <c:if test="${params.page == num}">
+                                                            <li class="active"><a href="javascript:void(0)" onclick="movePage(${num})">${num}</a></li>
+                                                        </c:if>
+                                                    </c:forEach>
 
                                                     <c:if test="${params.paging.nextPage}">
-                                                        <li><a href="/search/main?page=${params.paging.endPage + 1}"><i
+                                                        <li><a href="javascript:void(0)" onclick="movePage(${params.paging.endPage + 1})"><i
                                                                 class="lni lni-chevron-right"></i></a></li>
                                                     </c:if>
                                                 </ul>
@@ -299,10 +282,8 @@
 
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+    <%-- URL 쿼리에 있는 사용자의 검색 내용을 input form에 저장하는 함수 --%>
     $(document).ready(function () {
-
-        console.log('document ready 실행')
-
         if (!location.search) {
             return false;
         }
@@ -315,10 +296,26 @@
             }
         })
     });
-</script>
+
+    <%-- URL 쿼리가 있으면 사용자가 검색했던 내용을 보존한 채 보냄 --%>
+    function goDetail(itemId) {
+        const pagePath = (location.search) ? itemId + location.search : itemId;
+        location.href = '/search/detail/' + pagePath;
+    }
+
+    function movePage(page) {
+        if (!location.search) {
+            location.href = '/search/main?page=' + page;
+        }
+
+        const searchParams = new URLSearchParams(location.search);
+        searchParams.set('page', page);
+        const pagePath = searchParams.toString();
+
+        location.href = '/search/main?' + pagePath;
+    }
 
 <%--
-<script type="text/javascript">
     function heartCheck(itemId) {
         $.ajax({
             type: 'POST',
@@ -338,7 +335,8 @@
             }
         });
     }
-</script>--%>
+--%>
+</script>
 
 <%@ include file="/WEB-INF/common/footer.jsp" %>
  	

@@ -94,7 +94,8 @@
                                 <!-- 비로그인 사용자 -->
                                 <c:if test="${sessionScope.loginMember == null}">
                                     <li>
-                                        <a href="/member/login?addr=${requestScope['jakarta.servlet.forward.servlet_path']}"><i
+                                        <a href="javascript:void(0)"
+                                           onclick="location.href = '/member/login?' + location.pathname + location.search"><i
                                                 class="lni lni-enter"></i> 로그인</a>
                                     </li>
 
@@ -124,4 +125,4 @@
         </div> <!-- row -->
     </div> <!-- container -->
 </header>
-<!-- End Header Area -->
+<!-- End Header Area --></body>

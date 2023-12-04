@@ -68,7 +68,7 @@
                         </nav>
                     </div>
                     <div class="d1">
-                        <form:form modelAttribute="memberRegisterForm"
+                        <form:form modelAttribute="memberSaveDto"
                                 action="/member/register" method="post"
                               style=" border: 1px solid #c9c9c9; border-top: none; padding: 40px;">
                             <div style="margin:  10px;">
@@ -76,7 +76,7 @@
                             </div>
                             <div class="row mt-4">
                                 <div class="col-sm-9">
-                                    <input type="tel" name="tel" id="input_tel" class="form-control form-control-lg"
+                                    <input type="tel" name="phone" id="input_tel" class="form-control form-control-lg"
                                            id="tel" placeholder="전화번호(- 빼고 작성해주세요)" pattern="[0-9]{11}"
                                            style="font-size: 1.2em;" required>
                                 </div>
@@ -114,13 +114,13 @@
                             </div>
 
                             <div class="form-floating mt-4">
-                                <form:input type="text" path="name" class="form-control form-control-lg mt-3" required="required"/>
+                                <form:input type="text" path="userName" class="form-control form-control-lg mt-3" required="required"/>
                                 <label><span id="passResult">이름</span></label>
-                                <form:errors path="name" class="name" />
+                                <form:errors path="userName" class="name" />
                             </div>
 
                             <div class="button">
-                                <input type="hidden" name="role" value="customer">
+                                <input type="hidden" name="role" value="CUSTOMER">
                                 <button type="submit" class="btn">가입하기</button>
                             </div>
                             <p class="outer-link">이미 아이디가 있으신가요? <a href="/member/login"> 로그인 하기</a>
@@ -175,7 +175,7 @@
                             </div>
 
                             <div class="button">
-                                <input type="hidden" name="role" value="business">
+                                <input type="hidden" name="role" value="BUSINESS">
                                 <button type="submit" class="btn">가입하기</button>
                             </div>
                             <p class="outer-link">이미 아이디가 있으신가요? <a href="login.html"> 로그인 하기</a>

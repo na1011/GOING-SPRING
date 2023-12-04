@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="going.repository.mybatis.mappers.MemberMapper">
+
+    <!-- 멤버 저장 -->
+    <insert id="save" parameterType="going.domain.Member">
+        insert into MEMBER (
+        MEMBER_ID, EMAIL, PASSWORD, PHONE, USER_NAME
+        )
+        values (
+        MEMBER_SQ.nextval, #{email}, #{password}, #{phone}, #{userName}
+        )
+        <selectKey keyProperty="memberId" resultType="long" order="AFTER">
+            select MEMBER_SQ.currval from dual
+        </selectKey>
+    </insert>
+
+    <!-- 멤버 조회 -->
+    <select id="findByEmail" resultType="going.domain.Member" parameterType="string">
+        select EMAIL, PASSWORD, PHONE, USER_NAME, ROLE, JOIN_DATE
+        from MEMBER
+        WHERE EMAIL = #{email}
+    </select>
+
+    <!-- 멤버 수정 -->
+    <update id="update" parameterType="going.domain.Member">
+        update MEMBER
+        set PASSWORD = #{password},
+            PHONE = #{phone}
+        WHERE EMAIL = #{email}
+    </update>
+
+    <!-- 멤버 삭제 -->
+    <delete id="deleteByEmail" parameterType="String">
+        delete MEMBER
+        where EMAIL = #{email}
+    </delete>
+    
+    <!-- 중복 체크 -->
+    <select id="countMemberByEmail" resultType="int">
+        select
+    </select>
+</mapper>

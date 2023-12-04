@@ -21,4 +21,8 @@ public interface ItemMapper {
     List<Item> findAll(final SearchDto params);
 
     int count(final SearchDto params);
+
+    List<Item> orderByPrice();
+
+    List<Item> orderByLike();
 }

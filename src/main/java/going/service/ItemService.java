@@ -46,11 +46,23 @@ public class ItemService {
         PagingDto paging = new PagingDto(totalCount, params);
         params.setPaging(paging);
 
-        List<ItemResponseDto> findAll = itemRepository.findAll(params)
+        return itemRepository.findAll(params)
                 .stream()
                 .map(Item::toDto)
                 .toList();
+    }
 
-        return findAll;
+    public List<ItemResponseDto> orderByPrice() {
+        return itemRepository.orderByPrice()
+                .stream()
+                .map(Item::toDto)
+                .toList();
+    }
+
+    public List<ItemResponseDto> orderByLike() {
+        return itemRepository.orderByLike()
+                .stream()
+                .map(Item::toDto)
+                .toList();
     }
 }
