@@ -1,18 +1,14 @@
-package going.domain;
+package going.model.dto.item;
 
-import going.model.item.ItemResponseDto;
-import lombok.AccessLevel;
+import going.model.domain.Item;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Item {
+public class ItemSaveDto {
 
-    private Long itemId;
     private Long agencyId;
     private String itemName;
     private String agencyName;
@@ -21,11 +17,12 @@ public class Item {
     private String description;
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
-    private int likeCount;
+
+    public ItemSaveDto() {
+    }
 
     @Builder
-    public Item(Long itemId, Long agencyId, String itemName, String agencyName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate, int likeCount) {
-        this.itemId = itemId;
+    public ItemSaveDto(Long agencyId, String itemName, String agencyName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate) {
         this.agencyId = agencyId;
         this.itemName = itemName;
         this.agencyName = agencyName;
@@ -34,12 +31,11 @@ public class Item {
         this.description = description;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
-        this.likeCount = likeCount;
     }
 
-    public ItemResponseDto toDto() {
-        return ItemResponseDto.builder()
-                .itemId(itemId)
+    public Item toEntity() {
+        return Item.builder()
+                .agencyId(agencyId)
                 .itemName(itemName)
                 .agencyName(agencyName)
                 .location(location)
@@ -47,7 +43,6 @@ public class Item {
                 .description(description)
                 .departureDate(departureDate)
                 .arrivalDate(arrivalDate)
-                .likeCount(likeCount)
                 .build();
     }
 }

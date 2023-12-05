@@ -1,6 +1,6 @@
 package going.repository;
 
-import going.domain.Member;
+import going.model.domain.Member;
 
 import java.util.Optional;
 

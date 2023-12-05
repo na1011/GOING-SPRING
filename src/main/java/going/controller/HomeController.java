@@ -1,10 +1,9 @@
 package going.controller;
 
-import going.model.common.MessageDto;
-import going.model.item.ItemResponseDto;
+import going.model.dto.common.MessageDto;
+import going.model.dto.item.ItemResponseDto;
 import going.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.message.Message;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

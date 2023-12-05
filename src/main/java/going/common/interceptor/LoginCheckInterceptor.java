@@ -1,7 +1,7 @@
 package going.common.interceptor;
 
 import going.common.ConstField;
-import going.model.common.MessageDto;
+import going.model.dto.common.MessageDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;

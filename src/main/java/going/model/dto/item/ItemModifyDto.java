@@ -1,31 +1,29 @@
-package going.model.item;
+package going.model.dto.item;
 
-import going.domain.Item;
+import going.model.domain.Item;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class ItemSaveDto {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class ItemModifyDto {
 
-    private Long agencyId;
+    private Long itemId;
     private String itemName;
-    private String agencyName;
     private String location;
     private int price;
     private String description;
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
 
-    public ItemSaveDto() {
-    }
-
     @Builder
-    public ItemSaveDto(Long agencyId, String itemName, String agencyName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate) {
-        this.agencyId = agencyId;
+    public ItemModifyDto(Long itemId, String itemName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate) {
+        this.itemId = itemId;
         this.itemName = itemName;
-        this.agencyName = agencyName;
         this.location = location;
         this.price = price;
         this.description = description;
@@ -35,9 +33,8 @@ public class ItemSaveDto {
 
     public Item toEntity() {
         return Item.builder()
-                .agencyId(agencyId)
+                .itemId(itemId)
                 .itemName(itemName)
-                .agencyName(agencyName)
                 .location(location)
                 .price(price)
                 .description(description)

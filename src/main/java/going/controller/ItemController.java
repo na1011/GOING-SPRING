@@ -1,8 +1,8 @@
 package going.controller;
 
-import going.model.common.SearchDto;
-import going.model.item.ItemResponseDto;
-import going.model.item.ItemSaveDto;
+import going.model.dto.common.SearchDto;
+import going.model.dto.item.ItemResponseDto;
+import going.model.dto.item.ItemSaveDto;
 import going.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

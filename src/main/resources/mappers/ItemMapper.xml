@@ -62,7 +62,7 @@
     </insert>
 
     <!-- 상품 조회 -->
-    <select id="findById" resultType="going.domain.Item" parameterType="long">
+    <select id="findById" resultType="going.model.domain.Item" parameterType="long">
         <include refid="itemResponse" />
         and ITEM_ID = #{itemId}
     </select>
@@ -88,7 +88,7 @@
     </update>
 
     <!-- 상품 리스트 조회 -->
-    <select id="findAll" parameterType="going.model.common.SearchDto" resultType="going.domain.Item">
+    <select id="findAll" parameterType="going.model.dto.common.SearchDto" resultType="going.model.domain.Item">
         select *
         from (select a.*, ROWNUM as rnum
               from (<include refid="itemResponse" />
@@ -101,7 +101,7 @@
     </select>
 
     <!-- 상품 총 갯수 카운팅 -->
-    <select id="count" parameterType="going.model.common.SearchDto" resultType="int">
+    <select id="count" parameterType="going.model.dto.common.SearchDto" resultType="int">
         select count(*)
         from TRAVEL_ITEM
         where DELETE_YN = 0
@@ -109,7 +109,7 @@
     </select>
 
     <!-- 가격 순서, 인기 순서로 10위까지 정렬 -->
-    <select id="orderByPrice" resultType="going.domain.Item">
+    <select id="orderByPrice" resultType="going.model.domain.Item">
         select *
         from (select a.*, ROWNUM as rnum
                 from (
@@ -120,7 +120,7 @@
         ]]>
     </select>
 
-    <select id="orderByLike" resultType="going.domain.Item">
+    <select id="orderByLike" resultType="going.model.domain.Item">
         select *
         from (select a.*, ROWNUM as rnum
                 from (

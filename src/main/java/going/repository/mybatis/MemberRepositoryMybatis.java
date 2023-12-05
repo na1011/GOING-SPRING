@@ -1,6 +1,6 @@
 package going.repository.mybatis;
 
-import going.domain.Member;
+import going.model.domain.Member;
 import going.repository.MemberRepository;
 import going.repository.mybatis.mappers.MemberMapper;
 import lombok.RequiredArgsConstructor;

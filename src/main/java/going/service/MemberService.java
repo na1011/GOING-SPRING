@@ -1,9 +1,9 @@
 package going.service;
 
-import going.domain.Member;
-import going.model.member.MemberLoginDto;
-import going.model.member.MemberResponseDto;
-import going.model.member.MemberSaveDto;
+import going.model.domain.Member;
+import going.model.dto.member.MemberLoginDto;
+import going.model.dto.member.MemberResponseDto;
+import going.model.dto.member.MemberSaveDto;
 import going.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

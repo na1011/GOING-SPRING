@@ -1,7 +1,7 @@
 package going.common.resolver;
 
 import going.common.ConstField;
-import going.model.member.MemberResponseDto;
+import going.model.dto.member.MemberResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.core.MethodParameter;

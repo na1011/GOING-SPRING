@@ -1,4 +1,4 @@
-package going.model.item;
+package going.model.dto.item;
 
 import lombok.AccessLevel;
 import lombok.Builder;

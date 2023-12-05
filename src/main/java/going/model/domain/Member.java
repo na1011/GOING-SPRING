@@ -1,6 +1,7 @@
-package going.domain;
+package going.model.domain;
 
-import going.model.member.MemberResponseDto;
+import going.model.dto.member.MemberResponseDto;
+import going.model.dto.member.Role;
 import lombok.*;
 
 import java.time.LocalDateTime;

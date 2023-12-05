@@ -2,10 +2,10 @@ package going.controller;
 
 import going.common.ConstField;
 import going.common.resolver.Login;
-import going.model.common.MessageDto;
-import going.model.member.MemberLoginDto;
-import going.model.member.MemberResponseDto;
-import going.model.member.MemberSaveDto;
+import going.model.dto.common.MessageDto;
+import going.model.dto.member.MemberLoginDto;
+import going.model.dto.member.MemberResponseDto;
+import going.model.dto.member.MemberSaveDto;
 import going.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

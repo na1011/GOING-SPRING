@@ -1,7 +1,7 @@
 package going.repository.mybatis;
 
-import going.domain.Item;
-import going.model.common.SearchDto;
+import going.model.domain.Item;
+import going.model.dto.common.SearchDto;
 import going.repository.ItemRepository;
 import going.repository.mybatis.mappers.ItemMapper;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package going.repository;
 
-import going.domain.Item;
-import going.model.common.SearchDto;
+import going.model.domain.Item;
+import going.model.dto.common.SearchDto;
 
 import java.util.List;
 import java.util.Optional;

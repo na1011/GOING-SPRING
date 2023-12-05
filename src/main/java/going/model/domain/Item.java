@@ -1,5 +1,6 @@
-package going.model.item;
+package going.model.domain;
 
+import going.model.dto.item.ItemResponseDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,9 +10,10 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ItemResponseDto {
+public class Item {
 
     private Long itemId;
+    private Long agencyId;
     private String itemName;
     private String agencyName;
     private String location;
@@ -22,8 +24,9 @@ public class ItemResponseDto {
     private int likeCount;
 
     @Builder
-    public ItemResponseDto(Long itemId, String itemName, String agencyName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate, int likeCount) {
+    public Item(Long itemId, Long agencyId, String itemName, String agencyName, String location, int price, String description, LocalDateTime departureDate, LocalDateTime arrivalDate, int likeCount) {
         this.itemId = itemId;
+        this.agencyId = agencyId;
         this.itemName = itemName;
         this.agencyName = agencyName;
         this.location = location;
@@ -32,5 +35,19 @@ public class ItemResponseDto {
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.likeCount = likeCount;
+    }
+
+    public ItemResponseDto toDto() {
+        return ItemResponseDto.builder()
+                .itemId(itemId)
+                .itemName(itemName)
+                .agencyName(agencyName)
+                .location(location)
+                .price(price)
+                .description(description)
+                .departureDate(departureDate)
+                .arrivalDate(arrivalDate)
+                .likeCount(likeCount)
+                .build();
     }
 }

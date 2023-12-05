@@ -1,10 +1,10 @@
 package going.repository.mybatis.mappers;
 
-import going.domain.Item;
-import going.model.common.PagingDto;
-import going.model.common.SearchDto;
-import going.model.item.ItemModifyDto;
-import going.model.item.ItemSaveDto;
+import going.model.domain.Item;
+import going.model.dto.common.PagingDto;
+import going.model.dto.common.SearchDto;
+import going.model.dto.item.ItemModifyDto;
+import going.model.dto.item.ItemSaveDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

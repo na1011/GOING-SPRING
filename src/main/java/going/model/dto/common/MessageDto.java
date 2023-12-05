@@ -1,4 +1,4 @@
-package going.model.common;
+package going.model.dto.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

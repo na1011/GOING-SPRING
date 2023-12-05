@@ -1,31 +1,21 @@
-package going.model.member;
+package going.model.dto.member;
 
-import going.domain.Member;
+import going.model.domain.Member;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 
 @Getter
 @Setter
-@ToString
+@NoArgsConstructor
 public class MemberSaveDto {
 
     private String email;
     private String password;
     private String phone;
     private String userName;
-
-    public MemberSaveDto() {
-    }
-
-    public void encodingPassword(PasswordEncoder passwordEncoder) {
-        if (!StringUtils.hasLength(password)) {
-            return;
-        }
-        password = passwordEncoder.encode(password);
-    }
 
     public Member toEntity() {
         return Member.builder()
@@ -34,5 +24,12 @@ public class MemberSaveDto {
                 .phone(phone)
                 .userName(userName)
                 .build();
+    }
+
+    public void encodingPassword(PasswordEncoder passwordEncoder) {
+        if (!StringUtils.hasLength(password)) {
+            return;
+        }
+        password = passwordEncoder.encode(password);
     }
 }

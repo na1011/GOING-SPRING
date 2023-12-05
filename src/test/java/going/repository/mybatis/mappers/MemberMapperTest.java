@@ -1,7 +1,7 @@
 package going.repository.mybatis.mappers;
 
-import going.domain.Member;
-import going.domain.Role;
+import going.model.domain.Member;
+import going.model.dto.member.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

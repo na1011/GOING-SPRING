@@ -1,11 +1,11 @@
 package going.service;
 
 import going.common.exception.BadRequestException;
-import going.domain.Item;
-import going.model.common.PagingDto;
-import going.model.common.SearchDto;
-import going.model.item.ItemResponseDto;
-import going.model.item.ItemSaveDto;
+import going.model.domain.Item;
+import going.model.dto.common.PagingDto;
+import going.model.dto.common.SearchDto;
+import going.model.dto.item.ItemResponseDto;
+import going.model.dto.item.ItemSaveDto;
 import going.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
