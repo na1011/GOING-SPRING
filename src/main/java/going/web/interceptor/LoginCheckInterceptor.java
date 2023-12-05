@@ -1,6 +1,6 @@
-package going.common.interceptor;
+package going.web.interceptor;
 
-import going.common.ConstField;
+import going.web.ConstField;
 import going.model.dto.common.MessageDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

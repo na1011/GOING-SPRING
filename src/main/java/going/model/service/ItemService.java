@@ -1,7 +1,7 @@
-package going.service;
+package going.model.service;
 
-import going.common.exception.BadRequestException;
-import going.model.domain.Item;
+import going.web.exception.BadRequestException;
+import going.domain.Item;
 import going.model.dto.common.PagingDto;
 import going.model.dto.common.SearchDto;
 import going.model.dto.item.ItemResponseDto;

@@ -1,6 +1,6 @@
 package going.model.dto.member;
 
-import going.model.domain.Member;
+import going.domain.Member;
 import lombok.Builder;
 import lombok.Getter;
 

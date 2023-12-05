@@ -1,6 +1,6 @@
-package going.common.resolver;
+package going.web.resolver;
 
-import going.common.ConstField;
+import going.web.ConstField;
 import going.model.dto.member.MemberResponseDto;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

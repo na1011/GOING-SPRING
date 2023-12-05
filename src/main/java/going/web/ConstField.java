@@ -1,4 +1,4 @@
-package going.common;
+package going.web;
 
 public class ConstField {
 

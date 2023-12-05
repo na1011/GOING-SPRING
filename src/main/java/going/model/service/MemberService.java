@@ -1,6 +1,6 @@
-package going.service;
+package going.model.service;
 
-import going.model.domain.Member;
+import going.domain.Member;
 import going.model.dto.member.MemberLoginDto;
 import going.model.dto.member.MemberResponseDto;
 import going.model.dto.member.MemberSaveDto;

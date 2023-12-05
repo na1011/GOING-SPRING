@@ -1,4 +1,4 @@
-package going.model.domain;
+package going.domain;
 
 import going.model.dto.member.MemberResponseDto;
 import going.model.dto.member.Role;
@@ -7,7 +7,6 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Getter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 

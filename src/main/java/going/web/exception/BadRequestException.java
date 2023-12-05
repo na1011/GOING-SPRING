@@ -1,4 +1,4 @@
-package going.common.exception;
+package going.web.exception;
 
 public class BadRequestException extends RuntimeException {
     public BadRequestException(String message) {

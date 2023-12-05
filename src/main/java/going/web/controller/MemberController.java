@@ -1,12 +1,12 @@
-package going.controller;
+package going.web.controller;
 
-import going.common.ConstField;
-import going.common.resolver.Login;
+import going.web.ConstField;
+import going.web.resolver.Login;
 import going.model.dto.common.MessageDto;
 import going.model.dto.member.MemberLoginDto;
 import going.model.dto.member.MemberResponseDto;
 import going.model.dto.member.MemberSaveDto;
-import going.service.MemberService;
+import going.model.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

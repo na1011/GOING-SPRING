@@ -1,4 +1,4 @@
-package going.model.domain;
+package going.domain;
 
 import going.model.dto.item.ItemResponseDto;
 import lombok.AccessLevel;

@@ -1,6 +1,6 @@
 package going.repository;
 
-import going.model.domain.Item;
+import going.domain.Item;
 import going.model.dto.common.SearchDto;
 
 import java.util.List;

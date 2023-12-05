@@ -1,6 +1,6 @@
 package going.repository.mybatis.mappers;
 
-import going.model.domain.Item;
+import going.domain.Item;
 import going.model.dto.common.PagingDto;
 import going.model.dto.common.SearchDto;
 import going.model.dto.item.ItemModifyDto;

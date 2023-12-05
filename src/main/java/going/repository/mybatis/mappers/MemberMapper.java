@@ -1,6 +1,6 @@
 package going.repository.mybatis.mappers;
 
-import going.model.domain.Member;
+import going.domain.Member;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Optional;

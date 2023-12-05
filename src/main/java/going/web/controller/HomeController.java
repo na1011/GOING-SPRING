@@ -1,8 +1,8 @@
-package going.controller;
+package going.web.controller;
 
 import going.model.dto.common.MessageDto;
 import going.model.dto.item.ItemResponseDto;
-import going.service.ItemService;
+import going.model.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

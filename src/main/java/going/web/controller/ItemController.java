@@ -1,9 +1,9 @@
-package going.controller;
+package going.web.controller;
 
 import going.model.dto.common.SearchDto;
 import going.model.dto.item.ItemResponseDto;
 import going.model.dto.item.ItemSaveDto;
-import going.service.ItemService;
+import going.model.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

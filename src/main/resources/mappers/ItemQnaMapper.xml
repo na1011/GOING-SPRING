@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="going.repository.mybatis.mappers.ItemQnaMapper">
+
+    <sql id="qnaResponse">
+        select QNA_ID, ITEM_ID, USER_NAME, TITLE, CONTENT, WRITE_DATE
+        from QNA_ITEM
+        WHERE DELETE_YN = 0
+    </sql>
+
+    <insert id="save">
+        insert into QNA_ITEM (QNA_ID, ITEM_ID, USER_NAME, TITLE, CONTENT)
+        VALUES (QNA_SQ.nextval, #{itemId}, #{userName}, #{title}, #{content})
+
+        <selectKey keyProperty="qnaId" resultType="long" order="AFTER">
+            select QNA_SQ.currval from dual
+        </selectKey>
+    </insert>
+
+    <select id="findById" resultType="going.domain.Qna" parameterType="long">
+        <include refid="qnaResponse" />
+        and QNA_ID = #{qnaId}
+    </select>
+
+    <select id="findAll" resultType="going.domain.Qna" parameterType="long">
+        <include refid="qnaResponse" />
+        and ITEM_ID = #{itemId}
+        order by QNA_ID desc
+    </select>
+
+    <update id="update">
+        update QNA_ITEM
+        set TITLE   = #{title},
+            CONTENT = #{content}
+        where DELETE_YN = 0
+          and QNA_ID = #{qnaId}
+    </update>
+
+    <update id="deleteById" parameterType="long">
+        update QNA_ITEM
+        set DELETE_YN = 1
+        where QNA_ID = #{qnaId}
+    </update>
+
+    <select id="count" resultType="int">
+    </select>
+</mapper>

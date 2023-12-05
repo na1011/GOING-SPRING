@@ -1,7 +1,7 @@
 package going.config;
 
-import going.common.interceptor.LoginCheckInterceptor;
-import going.common.resolver.LoginResolver;
+import going.web.interceptor.LoginCheckInterceptor;
+import going.web.resolver.LoginResolver;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

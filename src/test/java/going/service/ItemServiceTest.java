@@ -1,7 +1,8 @@
 package going.service;
 
-import going.model.domain.Item;
+import going.domain.Item;
 import going.model.dto.item.ItemSaveDto;
+import going.model.service.ItemService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
