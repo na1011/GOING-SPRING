@@ -428,6 +428,7 @@ body {
 }
 
 .b_board-list .b_board-item-view {
+    display: none;
     padding-left: 91px;
     border-top: 1px solid #eaeced;
     background-color: #f7f8fa;
@@ -444,6 +445,28 @@ body {
     line-height: 18px;
     color: #5f5f5f;
     white-space: pre-line;
+}
+
+.delete-modify-qna {
+    display: inline-block;
+    position: relative;
+    margin-left: 10px;
+    padding-left: 11px;
+    font-size: 12px;
+    line-height: 18px;
+    color: #aaaaaa;
+    vertical-align: top;
+}
+
+.delete-modify-qna:before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    height: 11px;
+    margin-top: -6px;
+    background-color: #e1e1e1;
+    content: "";
 }
 /* Q&A 寃뚯떆�뙋 YWJ */
 

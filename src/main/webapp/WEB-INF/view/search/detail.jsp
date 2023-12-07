@@ -4,6 +4,72 @@
 <%@ include file="/WEB-INF/common/header.jsp" %>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+    function updateQna(qnaId) {
+        const title = document.querySelector('#title');
+        const content = document.querySelector('#content')
+        const userName = document.querySelector('#userName');
+
+        const params = {
+            qnaId: qnaId,
+            itemId: ${itemId},
+            title: title.value,
+            content: content.value
+        }
+
+        $.ajax({
+            url: '/search/detail/${itemId}/qna/' + qnaId,
+            type: 'patch',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(params),
+            async: false,
+
+            success: function (response) {
+                alert('수정되었습니다.');
+
+                let qnaTitleHtml = '<div>미답변</div>'
+                                + '<div><a href="javascript:void(0)" onclick="viewQna(' + response.qnaId + ')">' + response.title + '</a></div>'
+                                + '<div>' + response.userName + '</div>'
+                                + '<div>' + response.writeDate + '</div>';
+
+                let qnaViewHtml = '<div class="b_board-content">'
+                                +    '<p class="qnaContent">' + response.content + '</p>'
+                                + '</div>'
+
+                $('#qnaTitle' + qnaId).innerHTML = qnaTitleHtml;
+                $('#qnaView' + qnaId).innerHTML = qnaViewHtml;
+            },
+            error: function (request, status, error) {
+                console.log(error);
+            },
+        })
+    }
+
+    function updateForm(qnaId) {
+
+    }
+
+    function deleteQna(qnaId) {
+        if (!confirm('해당 문의를 삭제할까요?')) {
+            return false;
+        }
+
+        $.ajax({
+            url: '/search/detail/${itemId}/qna/' + qnaId,
+            type: 'delete',
+            dataType: 'json',
+            async: false,
+
+            success: function (response) {
+                alert('삭제되었습니다.');
+                findAllQnA();
+            },
+            error: function (request, status, error) {
+                console.log(error);
+            },
+        })
+    }
+
     function viewQna(qnaId) {
         const view = $('#qnaView'+qnaId);
         if (view.css('display') === 'none') {
@@ -75,7 +141,7 @@
                 // HTML 렌더링
                 let qnaHtml = '';
                 response.forEach(qna => {
-                    qnaHtml += '<div class="b_board-item">'
+                    qnaHtml += '<div id="qnaTitle' + qna.qnaId + '" class="b_board-item">'
                         + '<div>미답변</div>'
                         + '<div><a href="javascript:void(0)" onclick="viewQna(' + qna.qnaId + ')">' + qna.title + '</a></div>'
                         + '<div>' + qna.userName + '</div>'
@@ -84,6 +150,8 @@
                         + '<div id="qnaView' + qna.qnaId + '" class="b_board-item-view">'
                         +    '<div class="b_board-content">'
                         +    '<p class="qnaContent">' + qna.content + '</p>'
+                        +    '<a href="javascript:void(0)" onclick="updateQna(' + qna.qnaId + ')" class="delete-modify-qna">수정</a>'
+                        +    '<a href="javascript:void(0)" onclick="deleteQna(' + qna.qnaId + ')" class="delete-modify-qna">삭제</a>'
                         +    '</div>'
                         + '</div>';
                 })
@@ -364,7 +432,7 @@
                                                 <div class="row">
 
                                                     <h1 class="modal-qna-title">상품 문의하기</h1>
-                                                    <form method="post" action="" class="qna-write">
+                                                    <form class="qna-write">
                                                         <div class="mb-3 row g-2">
                                                             <div class="col-md">
                                                                 <label class="form-label">이름</label>

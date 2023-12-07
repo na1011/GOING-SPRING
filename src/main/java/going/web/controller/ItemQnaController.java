@@ -29,9 +29,17 @@ public class ItemQnaController {
         return qnaId;
     }
 
-    // qna 보기
-    @GetMapping("/search/detail/{itemId}/qna/{qnaId}")
-    public QnaResponseDto viewQna(@PathVariable("qnaId") Long qnaId) {
-        return service.findById(qnaId);
+    // qna 수정
+    @PatchMapping("/search/detail/{itemId}/qna/{qnaId}")
+    public QnaResponseDto updateQna(@PathVariable("qnaId") Long qnaId, @RequestBody QnaRequestDto params) {
+        Long id = service.updateQna(params);
+        return service.findById(id);
+    }
+
+    // qna 삭제
+    @DeleteMapping("/search/detail/{itemId}/qna/{qnaId}")
+    public Long deleteQna(@PathVariable("qnaId") Long qnaId) {
+        service.deleteQna(qnaId);
+        return qnaId;
     }
 }
