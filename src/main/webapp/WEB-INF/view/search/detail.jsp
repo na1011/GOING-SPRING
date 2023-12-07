@@ -274,34 +274,72 @@
                                                     <form method="post" action="" class="qna-write">
                                                         <div class="mb-3 row g-2">
                                                             <div class="col-md">
-                                                                <label for="name" class="form-label">이름</label>
+                                                                <label class="form-label">이름</label>
                                                                 <input type="text" class="form-control"
-                                                                       value="userA" disabled readonly>
+                                                                       id="userName" value="홍길동" disabled readonly>
                                                             </div>
                                                             <div class="col-md">
-                                                                <label for="name" class="form-label">날짜</label>
+                                                                <label class="form-label">날짜</label>
                                                                 <input type="text" class="form-control-plaintext"
-                                                                       value="SysDate" readonly>
+                                                                       id="writeDate" value="SysDate" readonly>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="name" class="form-label">제목</label>
-                                                            <input type="text" class="form-control">
+                                                            <label class="form-label">제목</label>
+                                                            <input type="text" class="form-control" id="title">
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label for="content" class="form-label">내용</label>
-                                                            <textarea class="form-control" rows="9"></textarea>
+                                                            <label class="form-label">내용</label>
+                                                            <textarea class="form-control" rows="9" id="content"></textarea>
                                                         </div>
                                                     </form>
 
                                                     <div class="modal-footer" style="justify-content: center;">
                                                         <button type="button"
-                                                                class="btn btn-outline-primary">등록
+                                                                class="btn btn-outline-primary" onclick="saveQna(${itemDetail.itemId})">등록
                                                         </button>
                                                         <button type="button" class="btn btn-outline-danger"
                                                                 data-bs-dismiss="modal">취소
                                                         </button>
                                                     </div>
+
+                                                    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+                                                    <script>
+                                                        function saveQna(itemId) {
+                                                            const userName = document.querySelector('#userName');
+                                                            const title = document.querySelector('#title');
+                                                            const content = document.querySelector('#content');
+
+                                                            const params = {
+                                                                itemId : itemId,
+                                                                userName : userName.value,
+                                                                title : title.value,
+                                                                content : content.value
+                                                            }
+
+                                                            $.ajax({
+                                                                url : '/search/detail/' + itemId + '/qna',
+                                                                type : 'post',
+                                                                contentType : 'application/json; charset=utf-8',
+                                                                dataType : 'json',
+                                                                data : JSON.stringify(params),
+                                                                async : false,
+
+                                                                success : function (response) {
+                                                                    console.log(response);
+                                                                },
+                                                                error: function (request, status, error) {
+                                                                    console.log(error);
+                                                                },
+                                                            })
+                                                        }
+
+                                                        function findAllQna() {
+                                                            const itemId = [[${itemDetail.itemId}]];
+
+                                                        }
+                                                    </script>
+
                                                 </div>
                                             </div>
                                         </div>
