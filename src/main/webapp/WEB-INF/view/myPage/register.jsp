@@ -75,7 +75,7 @@
                                 </nav>
 
                                 <form:form modelAttribute="itemSaveDto"
-                                        class="default-form-style" method="post" action="/search/register">
+                                           class="default-form-style" method="post" action="/search/register">
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-pane fade show active" id="nav-item-info" role="tabpanel"
                                              aria-labelledby="nav-item-info-tab">
@@ -154,7 +154,8 @@
                                                     <div class="col-12">
                                                         <div class="form-group">
                                                             <label>주소*</label>
-                                                            <input name="location" type="text" placeholder="주소를 입력해주세요"/>
+                                                            <input name="location" type="text"
+                                                                   placeholder="주소를 입력해주세요"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
@@ -217,17 +218,19 @@
                                                 <div class="row">
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>상품입력* </label> <form:errors path="itemName" class="errors" />
+                                                            <label>상품입력* </label> <form:errors path="itemName"
+                                                                                               class="errors"/>
                                                             <form:input path="itemName" type="text"
-                                                                   placeholder="상품명을 입력해주세요"/>
+                                                                        placeholder="상품명을 입력해주세요"/>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-12">
                                                         <div class="form-group">
-                                                            <label>가격 입력* </label> <form:errors path="price" class="errors" />
+                                                            <label>가격 입력* </label> <form:errors path="price"
+                                                                                                class="errors"/>
                                                             <form:input path="price" type="text"
-                                                                   placeholder="가격을 입력해주세요"/>
+                                                                        placeholder="가격을 입력해주세요"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">

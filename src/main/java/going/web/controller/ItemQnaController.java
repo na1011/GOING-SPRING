@@ -1,11 +1,8 @@
 package going.web.controller;
 
-import going.domain.Member;
-import going.model.dto.member.MemberResponseDto;
 import going.model.dto.qna.QnaRequestDto;
 import going.model.dto.qna.QnaResponseDto;
 import going.model.service.ItemQnaService;
-import going.web.resolver.Login;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -19,16 +16,22 @@ public class ItemQnaController {
 
     private final ItemQnaService service;
 
-    @PostMapping("/search/detail/{itemId}/qna")
-    public QnaResponseDto saveQna(@PathVariable("itemId") Long itemId, @RequestBody QnaRequestDto params) {
-        Long qnaId = service.saveQna(params);
-        return service.findById(qnaId);
-    }
-
+    // qna 리스트
     @GetMapping("/search/detail/{itemId}/qna")
     public List<QnaResponseDto> findAllQna(@PathVariable("itemId") Long itemId) {
         return service.findAll(itemId);
     }
 
+    // qna 등록
+    @PostMapping("/search/detail/{itemId}/qna")
+    public Long saveQna(@RequestBody QnaRequestDto params) {
+        Long qnaId = service.saveQna(params);
+        return qnaId;
+    }
 
+    // qna 보기
+    @GetMapping("/search/detail/{itemId}/qna/{qnaId}")
+    public QnaResponseDto viewQna(@PathVariable("qnaId") Long qnaId) {
+        return service.findById(qnaId);
+    }
 }

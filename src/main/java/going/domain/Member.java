@@ -2,7 +2,10 @@ package going.domain;
 
 import going.model.dto.member.MemberResponseDto;
 import going.model.dto.member.Role;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 

@@ -33,7 +33,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script>
         function loginHref() {
-            if(location.pathname === '/member/login') {
+            if (location.pathname === '/member/login') {
                 location.href = '/member/login';
             } else {
                 location.href = '/member/login?' + location.pathname + location.search;

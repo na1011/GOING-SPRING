@@ -27,7 +27,7 @@
     <update id="update" parameterType="going.domain.Member">
         update MEMBER
         set PASSWORD = #{password},
-            PHONE = #{phone}
+            PHONE    = #{phone}
         WHERE EMAIL = #{email}
     </update>
 
@@ -36,7 +36,7 @@
         delete MEMBER
         where EMAIL = #{email}
     </delete>
-    
+
     <!-- 중복 체크 -->
     <select id="countByEmail" parameterType="string" resultType="int">
         select EMAIL

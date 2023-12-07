@@ -19,12 +19,12 @@
     </insert>
 
     <select id="findById" resultType="going.domain.Qna" parameterType="long">
-        <include refid="qnaResponse" />
+        <include refid="qnaResponse"/>
         and QNA_ID = #{qnaId}
     </select>
 
     <select id="findAll" resultType="going.domain.Qna" parameterType="long">
-        <include refid="qnaResponse" />
+        <include refid="qnaResponse"/>
         and ITEM_ID = #{itemId}
         order by QNA_ID desc
     </select>

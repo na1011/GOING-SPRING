@@ -2,7 +2,99 @@
          pageEncoding="UTF-8" %>
 
 <%@ include file="/WEB-INF/common/header.jsp" %>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+    function viewQna(qnaId) {
+        const view = $('#qnaView'+qnaId);
+        if (view.css('display') === 'none') {
+            view.css('display', 'block');
+        } else {
+            view.css('display', 'none');
+        }
+    }
 
+    function saveQna(itemId) {
+        const userName = document.querySelector('#userName');
+        const title = document.querySelector('#title');
+        const content = document.querySelector('#content');
+
+        if (title.value.length === 0) {
+            alert('제목을 입력해주세요.');
+            return false;
+        }
+
+        const params = {
+            itemId: itemId,
+            userName: userName.value,
+            title: title.value,
+            content: content.value
+        };
+
+        $.ajax({
+            url: '/search/detail/${itemId}/qna',
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify(params),
+            // 위에서 선언한 params라는 이름의 객체에 정보를 담고
+            // JSON.stringify 함수로 JSON 문자열로 변환해서 서버로 전송
+            async: false,
+            // 기본옵션(true) : 서버에서 응답이 내려오지 않아도 Ajax 로직 실행, false는 응답이 내려와야 다음 로직 실행
+
+            success: function (response) {
+                alert('등록되었습니다.');
+                $('.btn-outline-danger').trigger('click');
+                title.value = '';
+                content.value = '';
+                findAllQnA();
+            },
+            error: function (request, status, error) {
+                console.log(error);
+            },
+        })
+    }
+
+    // 페이지 로딩 시점에 qna 목록 얻어오기
+    $(document).ready(() => {
+        findAllQnA()
+    });
+    function findAllQnA() {
+        $.ajax({
+            url: '/search/detail/${itemId}/qna',
+            type: 'get',
+            dataType: 'json',
+            async: false,
+
+            success: function (response) {
+                // 조회된 데이터가 없는 경우
+                if (response.length === 0) {
+                    document.querySelector('.b_board-list').innerHTML = '<div class="b_board-item"><div>등록된 QnA가 없습니다.</div></div>';
+                    return false;
+                }
+
+                // HTML 렌더링
+                let qnaHtml = '';
+                response.forEach(qna => {
+                    qnaHtml += '<div class="b_board-item">'
+                        + '<div>미답변</div>'
+                        + '<div><a href="javascript:void(0)" onclick="viewQna(' + qna.qnaId + ')">' + qna.title + '</a></div>'
+                        + '<div>' + qna.userName + '</div>'
+                        + '<div>' + qna.writeDate + '</div>'
+                        + '</div>'
+                        + '<div id="qnaView' + qna.qnaId + '" class="b_board-item-view">'
+                        +    '<div class="b_board-content">'
+                        +    '<p class="qnaContent">' + qna.content + '</p>'
+                        +    '</div>'
+                        + '</div>';
+                })
+                document.querySelector('.b_board-list').innerHTML = qnaHtml;
+            },
+            error: function (request, status, error) {
+                console.log(error);
+            },
+        })
+    }
+</script>
 <style>
     .b_board-list {
         margin: 10px 0;
@@ -63,7 +155,8 @@
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="product-info">
                         <h2 class="title">${itemDetail.itemName }</h2>
-                        <p class="location"><i class="lni lni-map-marker"></i><a href="javascript:void(0)">${itemDetail.location}</a></p>
+                        <p class="location"><i class="lni lni-map-marker"></i><a
+                                href="javascript:void(0)">${itemDetail.location}</a></p>
                         <h3 class="price">$<fmt:formatNumber value="${itemDetail.price}" pattern="#,###"/></h3>
                         <div class="list-info">
                             <h4>여행일정</h4>
@@ -290,55 +383,21 @@
                                                         </div>
                                                         <div class="mb-3">
                                                             <label class="form-label">내용</label>
-                                                            <textarea class="form-control" rows="9" id="content"></textarea>
+                                                            <textarea class="form-control" rows="9"
+                                                                      id="content"></textarea>
                                                         </div>
                                                     </form>
 
                                                     <div class="modal-footer" style="justify-content: center;">
                                                         <button type="button"
-                                                                class="btn btn-outline-primary" onclick="saveQna(${itemDetail.itemId})">등록
+                                                                class="btn btn-outline-primary"
+                                                                onclick="saveQna(${itemDetail.itemId})">등록
                                                         </button>
                                                         <button type="button" class="btn btn-outline-danger"
                                                                 data-bs-dismiss="modal">취소
                                                         </button>
                                                     </div>
 
-                                                    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-                                                    <script>
-                                                        function saveQna(itemId) {
-                                                            const userName = document.querySelector('#userName');
-                                                            const title = document.querySelector('#title');
-                                                            const content = document.querySelector('#content');
-
-                                                            const params = {
-                                                                itemId : itemId,
-                                                                userName : userName.value,
-                                                                title : title.value,
-                                                                content : content.value
-                                                            }
-
-                                                            $.ajax({
-                                                                url : '/search/detail/' + itemId + '/qna',
-                                                                type : 'post',
-                                                                contentType : 'application/json; charset=utf-8',
-                                                                dataType : 'json',
-                                                                data : JSON.stringify(params),
-                                                                async : false,
-
-                                                                success : function (response) {
-                                                                    console.log(response);
-                                                                },
-                                                                error: function (request, status, error) {
-                                                                    console.log(error);
-                                                                },
-                                                            })
-                                                        }
-
-                                                        function findAllQna() {
-                                                            const itemId = [[${itemDetail.itemId}]];
-
-                                                        }
-                                                    </script>
 
                                                 </div>
                                             </div>
@@ -356,45 +415,11 @@
                                             <div>작성일</div>
                                         </div>
                                         <hr style="width: 100%;"><!--줄-->
-                                        <ul class="b_board-list"><!--보드 리스트-->
-                                            <div class="b_board-item">
-                                                <div>미답변</div>
-                                                <div><a href="#">내용1</a></div>
-                                                <div>e***</div>
-                                                <div>2023.10.02.</div>
-                                            </div>
-                                            <div class="b_board-item">
-                                                <div>미답변</div>
-                                                <div><a href="#">내용2</a></div>
-                                                <div>go***</div>
-                                                <div>2023.09.08.</div>
-                                            </div>
-                                            <div class="b_board-item">
-                                                <div>답변완료</div>
-                                                <div><a href="#">내용3</a></div>
-                                                <div>ty***</div>
-                                                <div>2023.08.08.</div>
-                                            </div>
-                                            <div class="b_board-item">
-                                                <div>답변완료</div>
-                                                <div><a href="#">내용4</a></div>
-                                                <div>uj***</div>
-                                                <div>2023.07.08.</div>
-                                            </div>
-                                            <div class="b_board-item">
-                                                <div>답변완료</div>
-                                                <div><a href="#">내용5</a></div>
-                                                <div>bv***</div>
-                                                <div>2023.06.08.</div>
-                                            </div>
-                                            <div class="b_board-item">
-                                                <div>답변완료</div>
-                                                <div><a href="#">내용6</a></div>
-                                                <div>nm***</div>
-                                                <div>2023.05.08.</div>
-                                            </div>
+                                        <div class="b_board-list">
+                                            <!--보드 리스트-->
+
                                             <!-- 원하는 만큼 게시판 항목 추가 -->
-                                        </ul>
+                                        </div>
                                         <hr style="width: 100%;"><!--줄-->
                                     </div>
                                     <div class="b_pagination">
@@ -552,8 +577,7 @@
 </section>
 <!-- End Item Details -->
 
-<script type="text/javascript">
-
+<script>
     const current = document.getElementById("current");
     const opacity = 0.3;
     const imgs = document.querySelectorAll(".img");
@@ -606,7 +630,6 @@
         });
         cur_img.style.opacity = opacity;
     }
-
 </script>
 
 <%@ include file="/WEB-INF/common/footer.jsp" %>

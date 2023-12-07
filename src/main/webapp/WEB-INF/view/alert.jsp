@@ -5,11 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    <script>
-        window.onload = () => {
-            alert('${message.message}');
-            location.href = '${message.redirectURI}';
-        }
-    </script>
+<script>
+    window.onload = () => {
+        alert('${message.message}');
+        location.href = '${message.redirectURI}';
+    }
+</script>
 </body>
 </html>

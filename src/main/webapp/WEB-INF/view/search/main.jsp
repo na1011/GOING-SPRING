@@ -196,7 +196,8 @@
                                                     <div class="row align-items-center">
                                                         <div class="col-lg-5 col-md-7 col-12">
                                                             <div class="image">
-                                                                <a href="javascript:void(0)" onclick="goDetail(${trv.itemId})"><img
+                                                                <a href="javascript:void(0)"
+                                                                   onclick="goDetail(${trv.itemId})"><img
                                                                         src="${pageContext.request.contextPath}/resources/images/search/japan.png"
                                                                         alt="#"></a>
                                                                 <i class=" cross-badge lni lni-bolt"></i>
@@ -207,28 +208,30 @@
                                                             <div class="content">
                                                                 <a href="javascript:void(0)" class="tag">해외여행</a>
                                                                 <h3 class="title">
-                                                                    <a href="javascript:void(0)" onclick="goDetail(${trv.itemId})">${trv.itemName}</a>
+                                                                    <a href="javascript:void(0)"
+                                                                       onclick="goDetail(${trv.itemId})">${trv.itemName}</a>
                                                                 </h3>
-                                                                <p class="location"><a href="javascript:void(0)" onclick="goDetail(${trv.itemId})">
+                                                                <p class="location"><a href="javascript:void(0)"
+                                                                                       onclick="goDetail(${trv.itemId})">
                                                                     <i class="lni lni-map-marker">
                                                                     </i>${trv.location}</a></p>
                                                                 <ul class="info">
                                                                     <li class="price"><fmt:formatNumber
                                                                             value="${trv.price}" pattern="#,###"/>원
                                                                     </li>
-                                           <%--                         <c:if test="${sessionScope.loginMember eq null or !trv.likedBy.contains(sessionScope.loginMember)}">
-                                                                        <li id="like${trv.id}" class="like"><a
-                                                                                href="javascript:void(0)"
-                                                                                onclick="heartCheck(${trv.id})"><i
-                                                                                class="lni lni-heart"></i></a></li>
-                                                                    </c:if>
+                                                                        <%--                         <c:if test="${sessionScope.loginMember eq null or !trv.likedBy.contains(sessionScope.loginMember)}">
+                                                                                                     <li id="like${trv.id}" class="like"><a
+                                                                                                             href="javascript:void(0)"
+                                                                                                             onclick="heartCheck(${trv.id})"><i
+                                                                                                             class="lni lni-heart"></i></a></li>
+                                                                                                 </c:if>
 
-                                                                    <c:if test="${trv.likedBy.contains(sessionScope.loginMember)}">
-                                                                        <li id="like${trv.id}" class="like-filled"><a
-                                                                                href="javascript:void(0)"
-                                                                                onclick="heartCheck(${trv.id})"><i
-                                                                                class="lni lni-heart"></i></a></li>
-                                                                    </c:if>--%>
+                                                                                                 <c:if test="${trv.likedBy.contains(sessionScope.loginMember)}">
+                                                                                                     <li id="like${trv.id}" class="like-filled"><a
+                                                                                                             href="javascript:void(0)"
+                                                                                                             onclick="heartCheck(${trv.id})"><i
+                                                                                                             class="lni lni-heart"></i></a></li>
+                                                                                                 </c:if>--%>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -247,21 +250,27 @@
                                             <div class="pagination center">
                                                 <ul class="pagination-list">
                                                     <c:if test="${params.paging.prevPage}">
-                                                        <li><a href="javascript:void(0)" onclick="movePage(${params.paging.startPage - 1})"><i
+                                                        <li><a href="javascript:void(0)"
+                                                               onclick="movePage(${params.paging.startPage - 1})"><i
                                                                 class="lni lni-chevron-left"></i></a></li>
                                                     </c:if>
 
-                                                    <c:forEach var="num" begin="${params.paging.startPage}" end="${params.paging.endPage}">
+                                                    <c:forEach var="num" begin="${params.paging.startPage}"
+                                                               end="${params.paging.endPage}">
                                                         <c:if test="${params.page != num}">
-                                                            <li><a href="javascript:void(0)" onclick="movePage(${num})">${num}</a></li>
+                                                            <li><a href="javascript:void(0)"
+                                                                   onclick="movePage(${num})">${num}</a></li>
                                                         </c:if>
                                                         <c:if test="${params.page == num}">
-                                                            <li class="active"><a href="javascript:void(0)" onclick="movePage(${num})">${num}</a></li>
+                                                            <li class="active"><a href="javascript:void(0)"
+                                                                                  onclick="movePage(${num})">${num}</a>
+                                                            </li>
                                                         </c:if>
                                                     </c:forEach>
 
                                                     <c:if test="${params.paging.nextPage}">
-                                                        <li><a href="javascript:void(0)" onclick="movePage(${params.paging.endPage + 1})"><i
+                                                        <li><a href="javascript:void(0)"
+                                                               onclick="movePage(${params.paging.endPage + 1})"><i
                                                                 class="lni lni-chevron-right"></i></a></li>
                                                     </c:if>
                                                 </ul>
@@ -298,6 +307,7 @@
     });
 
     <%-- URL 쿼리가 있으면 사용자가 검색했던 내용을 보존한 채 보냄 --%>
+
     function goDetail(itemId) {
         const pagePath = (location.search) ? itemId + location.search : itemId;
         location.href = '/search/detail/' + pagePath;
@@ -315,27 +325,27 @@
         location.href = '/search/main?' + pagePath;
     }
 
-<%--
-    function heartCheck(itemId) {
-        $.ajax({
-            type: 'POST',
-            url: '/item/cart/add',
-            data: {
-                itemId: itemId
-            },
+    <%--
+        function heartCheck(itemId) {
+            $.ajax({
+                type: 'POST',
+                url: '/item/cart/add',
+                data: {
+                    itemId: itemId
+                },
 
-            success: function (result) {
-                if (result === "좋아요") {
-                    $('#like' + itemId).attr('class', 'like-filled');
-                } else if (result === "취소") {
-                    $('#like' + itemId).attr('class', 'like');
-                } else {
-                    alert('찜하기 기능은 로그인 후 이용하실 수 있습니다.');
+                success: function (result) {
+                    if (result === "좋아요") {
+                        $('#like' + itemId).attr('class', 'like-filled');
+                    } else if (result === "취소") {
+                        $('#like' + itemId).attr('class', 'like');
+                    } else {
+                        alert('찜하기 기능은 로그인 후 이용하실 수 있습니다.');
+                    }
                 }
-            }
-        });
-    }
---%>
+            });
+        }
+    --%>
 </script>
 
 <%@ include file="/WEB-INF/common/footer.jsp" %>

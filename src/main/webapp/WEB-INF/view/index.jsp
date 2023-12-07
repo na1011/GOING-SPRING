@@ -120,10 +120,14 @@
                                     </div>
                                     <div class="author">
                                         <a href="javascript:void(0)">
-                                            <button class="sale prev" style="font-size: 1.2em;" onclick="popular(${popularIndex.index - 1})">&lt;</button>
+                                            <button class="sale prev" style="font-size: 1.2em;"
+                                                    onclick="popular(${popularIndex.index - 1})">&lt;
+                                            </button>
                                         </a>
                                         <a href="javascript:void(0)" style="float: right;">
-                                            <button class="sale next" style="font-size: 1.2em;" onclick="popular(${popularIndex.index + 1})">&gt;</button>
+                                            <button class="sale next" style="font-size: 1.2em;"
+                                                    onclick="popular(${popularIndex.index + 1})">&gt;
+                                            </button>
                                         </a>
                                     </div>
                                 </div>
@@ -143,20 +147,22 @@
                                             <li><a href="javascript:void(0)">별점</a></li>
                                         </ul>
                                         <ul class="info-list">
-                                            <li><a href="/search/detail/${popular.itemId}"><i class="lni lni-map-marker"></i> ${popular.location}</a></li>
-                                            <li><a href="/search/detail/${popular.itemId}"><i class="lni lni-timer"></i> ${popular.departureDate}~</a></li>
+                                            <li><a href="/search/detail/${popular.itemId}"><i
+                                                    class="lni lni-map-marker"></i> ${popular.location}</a></li>
+                                            <li><a href="/search/detail/${popular.itemId}"><i
+                                                    class="lni lni-timer"></i> ${popular.departureDate}~</a></li>
                                         </ul>
                                     </div>
                                     <div class="bottom-content">
                                         <p class="price">Start From: <span>${popular.price}</span></p>
-                                        <%--<c:if test="${sessionScope.loginMember eq null or !popular.likedBy.contains(sessionScope.loginMember)}">
-                                            <a id="like${popular.id}"
-                                                    href="javascript:void(0)" class="like like${popular.id}" onclick="heartCheck(${popular.id})"><i class="lni lni-heart"></i></a>
-                                        </c:if>
-                                        <c:if test="${popular.likedBy.contains(sessionScope.loginMember)}">
-                                            <a id="like${popular.id}"
-                                                    href="javascript:void(0)" class="like-filled like${popular.id}" onclick="heartCheck(${popular.id})"><i class="lni lni-heart"></i></a>
-                                        </c:if>--%>
+                                            <%--<c:if test="${sessionScope.loginMember eq null or !popular.likedBy.contains(sessionScope.loginMember)}">
+                                                <a id="like${popular.id}"
+                                                        href="javascript:void(0)" class="like like${popular.id}" onclick="heartCheck(${popular.id})"><i class="lni lni-heart"></i></a>
+                                            </c:if>
+                                            <c:if test="${popular.likedBy.contains(sessionScope.loginMember)}">
+                                                <a id="like${popular.id}"
+                                                        href="javascript:void(0)" class="like-filled like${popular.id}" onclick="heartCheck(${popular.id})"><i class="lni lni-heart"></i></a>
+                                            </c:if>--%>
                                     </div>
                                 </div>
                             </div>
@@ -166,49 +172,54 @@
                 </div>
 
 
-
-                    <div class="col-lg-4 col-md-4 col-12">
-                        <h3>특가 상품</h3>
-                        <c:forEach var="price" items="${priceList}" varStatus="priceIndex">
-                            <div class="priceSlide">
-                                <div class="single-grid">
-                                    <div class="image">
-                                        <div class=imgBox3 style="width:300px;height:300px;">
-                                            <img class="img on"
-                                                 src="https://images.unsplash.com/photo-1556034910-07855ebf6606?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                                 alt="">
-                                        </div>
-                                        <div class="author">
-                                            <a href="javascript:void(0)">
-                                                <button class="sale prev" style="font-size: 1.2em;" onclick="price(${priceIndex.index - 1})">&lt;</button>
-                                            </a>
-                                            <a href="javascript:void(0)" style="float: right;">
-                                                <button class="sale next" style="font-size: 1.2em;" onclick="price(${priceIndex.index + 1})">&gt;</button>
-                                            </a>
-                                        </div>
+                <div class="col-lg-4 col-md-4 col-12">
+                    <h3>특가 상품</h3>
+                    <c:forEach var="price" items="${priceList}" varStatus="priceIndex">
+                        <div class="priceSlide">
+                            <div class="single-grid">
+                                <div class="image">
+                                    <div class=imgBox3 style="width:300px;height:300px;">
+                                        <img class="img on"
+                                             src="https://images.unsplash.com/photo-1556034910-07855ebf6606?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                                             alt="">
                                     </div>
-                                    <div class="content">
-                                        <div class="top-content">
-                                            <a href="javascript:void(0)" class="tag">정보</a>
-                                            <h3 class="title">
-                                                <a href="/search/detail/${price.itemId}">${price.itemName}</a>
-                                            </h3>
-                                            <p class="update-time">${priceIndex.index}번째</p>
-                                            <ul class="rating">
-                                                <li><i class="lni lni-star-filled"></i></li>
-                                                <li><i class="lni lni-star-filled"></i></li>
-                                                <li><i class="lni lni-star-filled"></i></li>
-                                                <li><i class="lni lni-star-filled"></i></li>
-                                                <li><i class="lni lni-star-filled"></i></li>
-                                                <li><a href="javascript:void(0)">별점</a></li>
-                                            </ul>
-                                            <ul class="info-list">
-                                                <li><a href="/search/detail/${price.itemId}"><i class="lni lni-map-marker"></i> ${price.location}</a></li>
-                                                <li><a href="/search/detail/${price.itemId}"><i class="lni lni-timer"></i> ${price.departureDate}~</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="bottom-content">
-                                            <p class="price">Start From: <span>${price.price}</span></p>
+                                    <div class="author">
+                                        <a href="javascript:void(0)">
+                                            <button class="sale prev" style="font-size: 1.2em;"
+                                                    onclick="price(${priceIndex.index - 1})">&lt;
+                                            </button>
+                                        </a>
+                                        <a href="javascript:void(0)" style="float: right;">
+                                            <button class="sale next" style="font-size: 1.2em;"
+                                                    onclick="price(${priceIndex.index + 1})">&gt;
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <div class="top-content">
+                                        <a href="javascript:void(0)" class="tag">정보</a>
+                                        <h3 class="title">
+                                            <a href="/search/detail/${price.itemId}">${price.itemName}</a>
+                                        </h3>
+                                        <p class="update-time">${priceIndex.index}번째</p>
+                                        <ul class="rating">
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><i class="lni lni-star-filled"></i></li>
+                                            <li><a href="javascript:void(0)">별점</a></li>
+                                        </ul>
+                                        <ul class="info-list">
+                                            <li><a href="/search/detail/${price.itemId}"><i
+                                                    class="lni lni-map-marker"></i> ${price.location}</a></li>
+                                            <li><a href="/search/detail/${price.itemId}"><i
+                                                    class="lni lni-timer"></i> ${price.departureDate}~</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="bottom-content">
+                                        <p class="price">Start From: <span>${price.price}</span></p>
                                             <%--<c:if test="${sessionScope.loginMember eq null or !price.likedBy.contains(sessionScope.loginMember)}">
                                                 <a id="like${price.id}"
                                                         href="javascript:void(0)" class="like like${price.id}" onclick="heartCheck(${price.id})"><i class="lni lni-heart"></i></a>
@@ -217,14 +228,13 @@
                                                 <a id="like${price.id}"
                                                         href="javascript:void(0)" class="like-filled like${price.id}" onclick="heartCheck(${price.id})"><i class="lni lni-heart"></i></a>
                                             </c:if>--%>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                        </c:forEach>
-                    </div>
-
+                    </c:forEach>
+                </div>
 
 
                 <div class="col-lg-4 col-md-4 col-12">
@@ -287,43 +297,43 @@
 <!-- /End Items Grid Area -->
 
 <script>
-   const popularSlide = document.querySelectorAll(".popularSlide");
-   const priceSlide = document.querySelectorAll(".priceSlide");
+    const popularSlide = document.querySelectorAll(".popularSlide");
+    const priceSlide = document.querySelectorAll(".priceSlide");
 
-   popular(0);
-   price(0);
+    popular(0);
+    price(0);
 
-   function popular(n) {
-       if (n < 0) {
-           n = popularSlide.length - 1;
-       }
+    function popular(n) {
+        if (n < 0) {
+            n = popularSlide.length - 1;
+        }
 
-       if (n > popularSlide.length - 1) {
-           n = 0;
-       }
+        if (n > popularSlide.length - 1) {
+            n = 0;
+        }
 
-       for (i = 0; i < popularSlide.length; i++) {
-           popularSlide[i].style.display = "none";
-       }
-       console.log("인기 인덱스 : " + n);
-       popularSlide[n].style.display = "block";
-   }
+        for (i = 0; i < popularSlide.length; i++) {
+            popularSlide[i].style.display = "none";
+        }
+        console.log("인기 인덱스 : " + n);
+        popularSlide[n].style.display = "block";
+    }
 
-   function price(n) {
-       if (n < 0) {
-           n = priceSlide.length - 1;
-       }
+    function price(n) {
+        if (n < 0) {
+            n = priceSlide.length - 1;
+        }
 
-       if (n > priceSlide.length - 1) {
-           n = 0;
-       }
+        if (n > priceSlide.length - 1) {
+            n = 0;
+        }
 
-       for (i = 0; i < priceSlide.length; i++) {
-           priceSlide[i].style.display = "none";
-       }
-       console.log("특가 인덱스 : " + n);
-       priceSlide[n].style.display = "block";
-   }
+        for (i = 0; i < priceSlide.length; i++) {
+            priceSlide[i].style.display = "none";
+        }
+        console.log("특가 인덱스 : " + n);
+        priceSlide[n].style.display = "block";
+    }
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -337,9 +347,9 @@
 
             success: function (result) {
                 if (result === "좋아요") {
-                    $('.like' + itemId).attr('class', 'like-filled like'+itemId);
+                    $('.like' + itemId).attr('class', 'like-filled like' + itemId);
                 } else if (result === "취소") {
-                    $('.like' + itemId).attr('class', 'like like'+itemId);
+                    $('.like' + itemId).attr('class', 'like like' + itemId);
                 } else {
                     alert('찜하기 기능은 로그인 후 이용하실 수 있습니다.');
                 }

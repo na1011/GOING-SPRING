@@ -404,7 +404,6 @@ body {
 
 .b_board-item > div {
     flex: 1;
-
 }
 
 .b_board-item > div > a {
@@ -428,6 +427,24 @@ body {
     text-decoration: none;
 }
 
+.b_board-list .b_board-item-view {
+    padding-left: 91px;
+    border-top: 1px solid #eaeced;
+    background-color: #f7f8fa;
+}
+
+.b_board-content {
+    padding: 16px 187px 19px 0;
+    word-break: break-all;
+}
+
+.b_board-item-view .b_board-content p {
+    display: inline;
+    font-size: 0.9em;
+    line-height: 18px;
+    color: #5f5f5f;
+    white-space: pre-line;
+}
 /* Q&A 寃뚯떆�뙋 YWJ */
 
 /* 由щ럭 �옉�꽦 CJH */

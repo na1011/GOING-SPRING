@@ -69,8 +69,8 @@
                     </div>
                     <div class="d1">
                         <form:form modelAttribute="MemberSaveDto"
-                                action="/member/register" method="post"
-                              style=" border: 1px solid #c9c9c9; border-top: none; padding: 40px;">
+                                   action="/member/register" method="post"
+                                   style=" border: 1px solid #c9c9c9; border-top: none; padding: 40px;">
                             <div style="margin:  10px;">
 
                             </div>
@@ -96,16 +96,17 @@
                             </div>
 
                             <div class="form-floating mt-5">
-                                <form:input type="email" path="email" class="form-control" id="email" required="required"/>
+                                <form:input type="email" path="email" class="form-control" id="email"
+                                            required="required"/>
                                 <label><span id="result">이메일</span></label>
-                                <form:errors path="email" class="errors" />
+                                <form:errors path="email" class="errors"/>
                             </div>
 
                             <div class="form-floating mt-3">
                                 <form:input type="password" path="password" class="form-control form-control-lg mt-3"
-                                       pattern="^(?=.*[a-zA-z])(?=.*[0-9]).{6,12}$" required="required"/>
+                                            pattern="^(?=.*[a-zA-z])(?=.*[0-9]).{6,12}$" required="required"/>
                                 <label><span>비밀번호 - 대문자 혹은 소문자와 숫자를 합해 6자리 이상 12자리 이하</span></label>
-                                <form:errors path="password" class="password" />
+                                <form:errors path="password" class="password"/>
                             </div>
                             <div class="form-floating mt-3">
                                 <input type="password" id="passC" class="form-control form-control-lg mt-3"
@@ -114,9 +115,10 @@
                             </div>
 
                             <div class="form-floating mt-4">
-                                <form:input type="text" path="userName" class="form-control form-control-lg mt-3" required="required"/>
+                                <form:input type="text" path="userName" class="form-control form-control-lg mt-3"
+                                            required="required"/>
                                 <label><span id="passResult">이름</span></label>
-                                <form:errors path="userName" class="name" />
+                                <form:errors path="userName" class="name"/>
                             </div>
 
                             <div class="button">

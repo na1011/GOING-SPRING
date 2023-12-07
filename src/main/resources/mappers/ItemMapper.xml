@@ -36,7 +36,7 @@
                     </choose>
                 </when>
                 <otherwise>
-                <!-- 전체 검색일 때 -->
+                    <!-- 전체 검색일 때 -->
                     and (item_name like '%' || #{keyword} || '%'
                     or location like '%' || #{keyword} || '%'
                     or agency_name like '%' || #{keyword} || '%'
@@ -50,12 +50,12 @@
     <insert id="save">
         insert into TRAVEL_ITEM (ITEM_ID, AGENCY_ID, ITEM_NAME, AGENCY_NAME, LOCATION, PRICE, DESCRIPTION)
         VALUES ( TRAVEL_ITEM_SQ.nextval
-               , #{agencyId}
-               , #{itemName}
-               , #{agencyName}
-               , #{location}
-               , #{price}
-               , #{description})
+        , #{agencyId}
+        , #{itemName}
+        , #{agencyName}
+        , #{location}
+        , #{price}
+        , #{description})
         <selectKey keyProperty="itemId" resultType="long" order="AFTER">
             select travel_item_sq.currval from dual
         </selectKey>
@@ -63,7 +63,7 @@
 
     <!-- 상품 조회 -->
     <select id="findById" resultType="going.domain.Item" parameterType="long">
-        <include refid="itemResponse" />
+        <include refid="itemResponse"/>
         and ITEM_ID = #{itemId}
     </select>
 
@@ -91,9 +91,10 @@
     <select id="findAll" parameterType="going.model.dto.common.SearchDto" resultType="going.domain.Item">
         select *
         from (select a.*, ROWNUM as rnum
-              from (<include refid="itemResponse" />
-                    <include refid="search" />
-                    order by ITEM_ID desc) a)
+        from (
+        <include refid="itemResponse"/>
+        <include refid="search"/>
+        order by ITEM_ID desc) a)
         <![CDATA[
         where rnum >= #{paging.startIndex}
           and rnum <= #{paging.endIndex}
@@ -105,16 +106,16 @@
         select count(*)
         from TRAVEL_ITEM
         where DELETE_YN = 0
-        <include refid="search" />
+        <include refid="search"/>
     </select>
 
     <!-- 가격 순서, 인기 순서로 10위까지 정렬 -->
     <select id="orderByPrice" resultType="going.domain.Item">
         select *
         from (select a.*, ROWNUM as rnum
-                from (
-                <include refid="itemResponse"/>
-                order by price asc, item_Name asc) a)
+        from (
+        <include refid="itemResponse"/>
+        order by price asc, item_Name asc) a)
         <![CDATA[
         where rnum<= 10
         ]]>
@@ -123,9 +124,9 @@
     <select id="orderByLike" resultType="going.domain.Item">
         select *
         from (select a.*, ROWNUM as rnum
-                from (
-                <include refid="itemResponse"/>
-                order by like_count asc, item_Name asc) a)
+        from (
+        <include refid="itemResponse"/>
+        order by like_count asc, item_Name asc) a)
         <![CDATA[
         where rnum<= 10
         ]]>
