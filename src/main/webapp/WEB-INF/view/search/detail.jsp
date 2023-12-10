@@ -4,6 +4,7 @@
 <%@ include file="/WEB-INF/common/header.jsp" %>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
+    // qna 수정
     function updateQna(qnaId) {
         const title = document.querySelector('#title');
         const content = document.querySelector('#content')
